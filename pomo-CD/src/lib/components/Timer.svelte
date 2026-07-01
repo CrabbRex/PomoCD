@@ -4,6 +4,8 @@
     let totalSeconds = 2 * 60;
     let secondsLeft = $state(totalSeconds);
 
+    let roration = $state(0);
+
     let running = $state(false);
 
     const r = 90;
@@ -12,6 +14,12 @@
     function progress() {
         return secondsLeft / totalSeconds;
     }
+
+    setInterval(() => {
+        if (running) {
+            roration = (roration + 1) % 360;
+        }
+    }, 1000 / 60);
 
     let interval: ReturnType<typeof setInterval> | null = null;
 
@@ -31,10 +39,10 @@
 
     function stop() {
       running = false;
-        // if (interval) {
-        //     clearInterval(interval);
-        // }
-        // interval = null;
+      if (interval) {
+          clearInterval(interval);
+      }
+      interval = null;
     }
 
     function reset() {
@@ -57,8 +65,8 @@
 
   <!-- CD -->
   <div
-    class:animate-cd-spin={running}
-    class="relative h-72 w-72 rounded-full bg-gradient-to-br from-zinc-200 via-zinc-500 to-zinc-900 shadow-2xl"
+    class="animate-cd-spin relative h-72 w-72 rounded-full bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-900 shadow-2xl"
+    style:animation-play-state={running ? 'running' : 'paused'}
   >
 
   </div>
@@ -75,24 +83,3 @@
     <button onclick={reset}>Reset</button>
 </div>
 
-<!-- <style>
-  .container {
-    display: grid;
-    place-items: center;
-    position: relative;
-    height: 100vh;
-  }
-
-  .text {
-    position: absolute;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  button {
-    margin: 0.5rem;
-  }
-</style> -->
