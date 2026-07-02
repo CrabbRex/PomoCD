@@ -47,6 +47,11 @@ export function pauseMusic() {
 	player.pauseVideo();
 }
 
+export function nextSong() {
+	if (!isReady || !player) return;
+	player.nextVideo();
+}
+
 export function unmuteMusic() {
 	if (!isReady || !player) return;
 	player.unMute();
@@ -74,7 +79,11 @@ export function updateThumbnail() {
 	if (!videoId) return;
 
 	currentThumbnail.set(
-		`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+		`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
 	);
-	console.log('Updated thumbnail to:', `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`);
+	console.log('Updated thumbnail to:', `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
+}
+
+export function getPlayer(): YT.Player | null {
+	return player;
 }

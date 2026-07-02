@@ -16,6 +16,7 @@ declare global {
 			mute(): void;
 			unMute(): void;
 			getVideoData(): { video_id: string };
+			nextVideo(): void;
 		}
 	}
 
