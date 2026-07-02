@@ -50,6 +50,7 @@ export function pauseMusic() {
 export function nextSong() {
 	if (!isReady || !player) return;
 	player.nextVideo();
+	setTimeout(updateThumbnail, 500);
 }
 
 export function unmuteMusic() {
@@ -82,8 +83,4 @@ export function updateThumbnail() {
 		`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
 	);
 	console.log('Updated thumbnail to:', `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
-}
-
-export function getPlayer(): YT.Player | null {
-	return player;
 }
