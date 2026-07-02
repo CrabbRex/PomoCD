@@ -8,6 +8,21 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	namespace YT {
+		interface Player {
+			playVideo(): void;
+			pauseVideo(): void;
+			mute(): void;
+			unMute(): void;
+			getVideoData(): { video_id: string };
+		}
+	}
+
+	interface Window {
+		YT: typeof YT;
+		onYouTubeIframeAPIReady: () => void;
+	}
 }
 
 export {};

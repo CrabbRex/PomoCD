@@ -1,3 +1,5 @@
+import { debugPlayer, pauseMusic, playMusic, unmuteMusic } from "$lib/services/youtubePlayer";
+
 class TimerStore {
     totalSeconds = $state(2 * 60);
 	secondsLeft = $state(this.totalSeconds);
@@ -14,6 +16,9 @@ class TimerStore {
 		if (this.interval) return; // Timer is already running
 
 		this.isRunning = true;
+		playMusic();
+		unmuteMusic();
+		debugPlayer();
 
 		this.interval = setInterval(() => {
 			if (this.secondsLeft > 0) {
@@ -27,6 +32,7 @@ class TimerStore {
 
 	stop() {
 		this.isRunning = false;
+		pauseMusic();
 		if (this.interval) {
 			clearInterval(this.interval);
 		}
