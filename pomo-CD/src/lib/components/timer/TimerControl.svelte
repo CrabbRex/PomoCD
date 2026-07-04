@@ -1,5 +1,6 @@
 <script>
 	import { timer } from '$lib/stores/timer.svelte';
+	import { nextSong } from '$lib/services/youtubePlayer';
 </script>
 
 <div class="grid grid-cols-5 grid-rows-1 gap-4">
@@ -19,7 +20,7 @@
 			/>
 		</svg>
 	</button>
-	<button class="btn col-start-5" onclick={() => timer.reset()} aria-label="Reset timer"> Next Song
+	<button class="btn col-start-5" onclick={() => nextSong()} aria-label="Next song"> Next Song
 		
 	</button>
 </div>

@@ -6,13 +6,13 @@
 <div class="relative h-150 w-150">
 	<div
 		class="absolute inset-0 rounded-full animate-cd-spin
-		bg-gradient-to-br from-zinc-100 via-zinc-400 to-zinc-900
+		bg-linear-to-br from-zinc-100 via-zinc-400 to-zinc-900
 		shadow-2xl border border-zinc-700"
 		style:animation-play-state={timer.isRunning ? 'running' : 'paused'}
 	>
 		<div
 			class="absolute inset-3 rounded-full overflow-hidden
-			bg-gradient-to-br from-zinc-200 via-zinc-500 to-zinc-800 shadow-inner"
+			bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800 shadow-inner"
 		>
 			{#if $currentThumbnail}
 				<img src={$currentThumbnail} alt="" class="h-full w-full object-cover" />
