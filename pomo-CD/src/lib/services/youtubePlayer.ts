@@ -1,4 +1,4 @@
-import { currentThumbnail } from "$lib/stores/music";
+import { currentThumbnail } from '$lib/stores/music';
 
 let player: YT.Player | null = null;
 let isReady = false;
@@ -25,6 +25,28 @@ export function initYouTubePlayer() {
 			events: {
 				onReady: () => {
 					isReady = true;
+				},
+				onStateChange: (event: YT.OnStateChangeEvent) => {
+					console.log(event.data);
+
+					switch (event.data) {
+						case window.YT.PlayerState.PLAYING:
+							console.log('Playing');
+							updateThumbnail();
+							break;
+
+						case window.YT.PlayerState.PAUSED:
+							console.log('Paused');
+							break;
+
+						case window.YT.PlayerState.ENDED:
+							console.log('Ended');
+							break;
+
+						case window.YT.PlayerState.BUFFERING:
+							console.log('Buffering');
+							break;
+					}
 				}
 			}
 		});
@@ -50,7 +72,6 @@ export function pauseMusic() {
 export function nextSong() {
 	if (!isReady || !player) return;
 	player.nextVideo();
-	setTimeout(updateThumbnail, 500);
 }
 
 export function unmuteMusic() {
@@ -79,8 +100,6 @@ export function updateThumbnail() {
 
 	if (!videoId) return;
 
-	currentThumbnail.set(
-		`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-	);
+	currentThumbnail.set(`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
 	console.log('Updated thumbnail to:', `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
 }

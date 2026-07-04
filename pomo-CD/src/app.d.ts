@@ -18,10 +18,26 @@ declare global {
 			getVideoData(): { video_id: string };
 			nextVideo(): void;
 		}
+
+		enum PlayerState {
+			UNSTARTED = -1,
+			ENDED = 0,
+			PLAYING = 1,
+			PAUSED = 2,
+			BUFFERING = 3,
+			CUED = 5
+		}
+
+		interface OnStateChangeEvent {
+			data: PlayerState;
+		}
 	}
 
 	interface Window {
-		YT: typeof YT;
+		YT: {
+			Player: new (elementId: string, config: unknown) => YT.Player;
+			PlayerState: typeof YT.PlayerState;
+		};
 		onYouTubeIframeAPIReady: () => void;
 	}
 }

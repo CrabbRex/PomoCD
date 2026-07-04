@@ -11,6 +11,14 @@ class TimerStore {
 
 	interval: ReturnType<typeof setInterval> | null = null;
 
+	startStop() {
+		if (this.isRunning) {
+			this.stop();
+		} else {
+			this.start();
+		}
+	}
+
 	start() {
 		console.log("HERE");
 		if (this.interval) return; // Timer is already running
