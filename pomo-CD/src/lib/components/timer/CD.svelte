@@ -32,7 +32,7 @@
 		<div
 			class="absolute top-1/2 left-1/2 h-10 w-10
 			-translate-x-1/2 -translate-y-1/2
-			rounded-full bg-blue-400 shadow-inner z-20"
+			rounded-full shadow-inner z-20"
 		></div>
 	</div>
 	<div

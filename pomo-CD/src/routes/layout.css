@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @plugin 'daisyui' {
-	themes: light --default, dark --prefersdark, aqua;
+	themes: light --default, dark --prefersdark, retro, luxury;
 }
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
