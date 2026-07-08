@@ -1,4 +1,4 @@
-import { debugPlayer, pauseMusic, playMusic, unmuteMusic } from "$lib/services/youtubePlayer";
+import { youtubePlayer } from "$lib/services/youtubePlayer.svelte";
 
 class TimerStore {
     totalSeconds = $state(2 * 60);
@@ -20,27 +20,22 @@ class TimerStore {
 	}
 
 	start() {
-		console.log("HERE");
-		if (this.interval) return; // Timer is already running
-
 		this.isRunning = true;
-		playMusic();
-		unmuteMusic();
-		debugPlayer();
+		youtubePlayer.play();
+		youtubePlayer.unmute();
 
 		this.interval = setInterval(() => {
 			if (this.secondsLeft > 0) {
 				this.secondsLeft -= 1;
-				console.log("Seconds left:", this.secondsLeft);
 			} else {
-				stop();
+				this.stop();
 			}
 		}, 1000);
 	}
 
 	stop() {
 		this.isRunning = false;
-		pauseMusic();
+		youtubePlayer.pause();
 		if (this.interval) {
 			clearInterval(this.interval);
 		}

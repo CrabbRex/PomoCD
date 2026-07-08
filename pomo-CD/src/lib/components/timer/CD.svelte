@@ -1,6 +1,6 @@
 <script>
 	import { timer } from '$lib/stores/timer.svelte';
-	import { currentThumbnail } from '$lib/stores/music';
+	import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 	import { fade } from 'svelte/transition';
 </script>
 
@@ -12,10 +12,10 @@
 		style:animation-play-state={timer.isRunning ? 'running' : 'paused'}
 	>
 		<div class="absolute inset-3 rounded-full overflow-hidden bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800 shadow-inner">
-			{#key $currentThumbnail}
+			{#key youtubePlayer.thumbnail}
 				<div class="absolute inset-0" transition:fade={{ duration: 400 }}>
-					{#if $currentThumbnail}
-						<img src={$currentThumbnail} alt="" class="h-full w-full object-cover" />
+					{#if youtubePlayer.thumbnail}
+						<img src={youtubePlayer.thumbnail} alt="" class="h-full w-full object-cover" />
 					{:else}
 						<div class="h-full w-full bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800"></div>
 					{/if}

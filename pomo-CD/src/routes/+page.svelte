@@ -1,13 +1,13 @@
 <script>
 	import Timer from '$lib/components/timer/Timer.svelte';
 	import Volume from '$lib/components/music/volume.svelte';
-    import { initYouTubePlayer } from '$lib/services/youtubePlayer';
+    import { youtubePlayer  } from '$lib/services/youtubePlayer.svelte';
     import { onMount } from 'svelte';
 
 	
 
     onMount(() => {
-        initYouTubePlayer();
+        youtubePlayer.init();
     });
 </script>
 

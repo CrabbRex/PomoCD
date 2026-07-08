@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { playlists } from '$lib/data/playlists';
-	import { setPlaylist } from '$lib/services/youtubePlayer';
+	import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 	import { timer } from '$lib/stores/timer.svelte';
 	import { onMount } from 'svelte';
+
 	let currentPlaylist = $state(playlists[0]);
+
 	onMount(() => {
-		setPlaylist(currentPlaylist.id, false);
+		youtubePlayer.setPlaylist(currentPlaylist.id, false);
 	});
 </script>
 
@@ -15,10 +17,14 @@
 	<ul class="menu gap-2">
 		{#each playlists as playlist (playlist.id)}
 			<button class="btn btn-neutral mt-5 mb-5" 
+			disabled={youtubePlayer.isSwitching}
 			onclick={() => {
 				currentPlaylist = playlist;
-				setPlaylist(playlist.id, timer.isRunning);}} aria-label="Select playlist">
+				youtubePlayer.setPlaylist(playlist.id, timer.isRunning);}} aria-label="Select playlist">
 				{playlist.name}
+				{#if youtubePlayer.isSwitching && youtubePlayer.currentPlaylistId === playlist.id}
+					<span class="loading loading-spinner loading-xs"></span>
+				{/if}
 			</button>
 		{/each}
 	</ul>

@@ -1,6 +1,6 @@
 <script>
 	import { timer } from '$lib/stores/timer.svelte';
-	import { nextSong } from '$lib/services/youtubePlayer';
+	import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 </script>
 
 <div class="grid grid-cols-5 grid-rows-1 gap-4">
@@ -20,7 +20,7 @@
 			/>
 		</svg>
 	</button>
-	<button class="btn btn-neutral col-start-5" onclick={() => nextSong()} aria-label="Next song"> Next Song
+	<button class="btn btn-neutral col-start-5" onclick={() => youtubePlayer.next()} aria-label="Next song"> Next Song
 		
 	</button>
 </div>
