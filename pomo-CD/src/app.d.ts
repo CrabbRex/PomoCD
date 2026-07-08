@@ -13,10 +13,17 @@ declare global {
 		interface Player {
 			playVideo(): void;
 			pauseVideo(): void;
+			stopVideo(): void;
 			mute(): void;
 			unMute(): void;
 			getVideoData(): { video_id: string };
 			nextVideo(): void;
+			previousVideo(): void;
+			loadPlaylist(playlist: { listType: string; list: string; index?: number; startSeconds?: number }): void;
+			cuePlaylist(playlist: { listType: string; list: string; index?: number; startSeconds?: number }): void;
+			getVideoData(): { video_id: string };
+			getPlayerState(): PlayerState;
+			setVolume(volume: number): void;
 		}
 
 		enum PlayerState {

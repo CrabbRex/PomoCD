@@ -1,7 +1,10 @@
 <script>
 	import Timer from '$lib/components/timer/Timer.svelte';
+	import Volume from '$lib/components/music/volume.svelte';
     import { initYouTubePlayer } from '$lib/services/youtubePlayer';
     import { onMount } from 'svelte';
+
+	
 
     onMount(() => {
         initYouTubePlayer();
@@ -12,11 +15,19 @@
 	<header class="flex justify-center py-6">
 		<h1 class="text-3xl font-bold">PomoCD</h1>
 	</header>
-	<div class="flex flex-1 items-center justify-center">
-		<Timer />
+	<div class="grid grid-cols-3 grid-rows-1 gap-4">
+		<div class="flex flex-col items-center justify-center col-span-1">
+			<Volume />
+		</div>
+		<div class="flex flex-1 items-center justify-center col-span-2">
+			<Timer />
+		</div>
+		<div id="player" style="width:0;height:0;"></div>
 	</div>
-    <div id="player" style="width:0;height:0;"></div>
+	
+    
 	<!-- <div class="top-4 right-4 fixed">
 		<button class="btn">here</button>
 	</div> -->
+	
 </main>
