@@ -8,7 +8,7 @@
 	
 
 	onDestroy(() => {
-		timer.stop();
+		timer.pause();
 	});
 </script>
 
