@@ -3,7 +3,6 @@
 </script>
 
 <div class="flex flex-col items-center gap-3">
-	<span class="text-xl">🔊</span>
 	<input
 		type="range"
 		min="0"
@@ -14,5 +13,4 @@
 		}}
 		class="range range-vertical"
 	/>
-	<span class="text-xl">🔈</span>
 </div>
