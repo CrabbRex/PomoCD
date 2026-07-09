@@ -1,6 +1,6 @@
 <script>
 	import Timer from '$lib/components/timer/Timer.svelte';
-	import Volume from '$lib/components/music/volume.svelte';
+	import MusicControls from '$lib/components/music/MusicControls.svelte';
     import { youtubePlayer  } from '$lib/services/youtubePlayer.svelte';
     import { onMount } from 'svelte';
 
@@ -16,8 +16,8 @@
 		<h1 class="text-3xl font-bold">PomoCD</h1>
 	</header>
 	<div class="grid grid-cols-3 grid-rows-1 gap-4">
-		<div class="flex flex-col items-center justify-center col-span-1">
-			<Volume />
+		<div class="flex flex-col items-center justify-center">
+			<MusicControls />
 		</div>
 		<div class="flex flex-1 items-center justify-center col-span-2">
 			<Timer />
