@@ -4,14 +4,24 @@
 	import { fade } from 'svelte/transition';
 </script>
 
-<div class="relative h-150 w-150">
+<div
+	class="
+		aspect-square
+		w-[min(70vh,70vw)]
+		max-w-full
+		max-h-full
+		relative
+		"
+>
 	<div
 		class="absolute inset-0 rounded-full animate-cd-spin
 		bg-linear-to-br from-zinc-100 via-zinc-400 to-zinc-900
 		shadow-2xl border border-zinc-700"
 		style:animation-play-state={timer.isRunning ? 'running' : 'paused'}
 	>
-		<div class="absolute inset-3 rounded-full overflow-hidden bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800 shadow-inner">
+		<div
+			class="absolute inset-3 rounded-full overflow-hidden bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800 shadow-inner"
+		>
 			{#key youtubePlayer.thumbnail}
 				<div class="absolute inset-0" transition:fade={{ duration: 400 }}>
 					{#if youtubePlayer.thumbnail}

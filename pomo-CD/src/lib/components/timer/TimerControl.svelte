@@ -2,7 +2,7 @@
 	import { timer } from '$lib/stores/timer.svelte';
 </script>
 
-<div class="grid grid-cols-5 grid-rows-1 gap-4">
+<div class="flex flex-grid justify-center items-centre gap-4">
 	<!-- <button class="btn btn-neutral btn-sm" onclick={() => timer.reset()} aria-label="Reset Timer">
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 			<path
@@ -13,7 +13,7 @@
 		</svg>
 	</button> -->
 	<button
-		class="btn btn-neutral btn-sm col-span-3"
+		class="btn btn-neutral btn-wide btn-sm"
 		onclick={() => timer.startStop()}
 		aria-label="Start/Stop Timer"
 	>
@@ -24,7 +24,7 @@
 		</svg>
 	</button>
 	<button
-		class="btn btn-neutral btn-sm col-start-5"
+		class="btn btn-neutral btn-sm"
 		onclick={() => {timer.skip()}}
 		aria-label="Next song"
 	>

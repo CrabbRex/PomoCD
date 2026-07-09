@@ -38,10 +38,10 @@
 </div>
 
 <!-- Settings drawer (opens from the left) -->
-<div class="drawer" data-theme="luxury">
+<div class="drawer drawer-end" data-theme="luxury">
 	<input id="settings-drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content">
-		<label for="settings-drawer" class="btn drawer-button btn-neutral top-4 left-4 fixed" aria-label="Open settings">
+		<label for="settings-drawer" class="btn drawer-button btn-neutral top-4 right-24 fixed" aria-label="Open settings">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 				<path
 					fill-rule="evenodd"
