@@ -150,6 +150,11 @@ setPlaylist(playlistId: string, shouldPlay = false) {
 		this.player.nextVideo();
 	}
 
+	previous() {
+		if (!this.isReady || !this.player) return;
+		this.player.previousVideo();
+	}
+
 	unmute() {
 		if (!this.isReady || !this.player) return;
 		this.player.unMute();

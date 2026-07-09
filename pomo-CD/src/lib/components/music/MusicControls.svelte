@@ -12,7 +12,7 @@
 	<div class="flex flex-col items-center justify-center gap-6">
 		<button
 			class="btn btn-neutral m-5"
-			//onclick={() => youtubePlayer.previous()}
+			onclick={() => youtubePlayer.previous()}
 			aria-label="Previous song"
 		>
 			<svg
@@ -28,7 +28,7 @@
 		</button>
 		
 		<button
-			class="btn btn-neutral m-5"
+			class="btn btn-neutral btn-lg m-5"
 			onclick={() => timer.startStop()}
 			aria-label="Previous song"
 		>
