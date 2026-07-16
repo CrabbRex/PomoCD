@@ -21,9 +21,9 @@ declare global {
 			previousVideo(): void;
 			loadPlaylist(playlist: { listType: string; list: string; index?: number; startSeconds?: number }): void;
 			cuePlaylist(playlist: { listType: string; list: string; index?: number; startSeconds?: number }): void;
-			getVideoData(): { video_id: string };
 			getPlayerState(): PlayerState;
 			setVolume(volume: number): void;
+			setLoop(loop: boolean): void;
 		}
 
 		enum PlayerState {

@@ -10,6 +10,7 @@ class YouTubePlayerStore {
 	playerState = $state<YT.PlayerState | null>(null);
 	volume = $state(50);
 	thumbnail = $state<string | null>(null);
+	repeatEnabled = $state(true);
 
 	player: YT.Player | null = null;
 	private pendingPlaylistId: string | null = null;
@@ -46,20 +47,23 @@ class YouTubePlayerStore {
 
 					switch (event.data) {
 						case window.YT.PlayerState.PLAYING:
-							console.log('Playing');
+							//console.log('Playing');
 							this.updateThumbnail();
 							break;
 						case window.YT.PlayerState.PAUSED:
-							console.log('Paused');
+							//console.log('Paused');
 							break;
 						case window.YT.PlayerState.ENDED:
-							console.log('Ended');
+							//console.log('Ended');
+							if(!this.repeatEnabled) {
+								this.playerState = window.YT.PlayerState.ENDED;
+							}
 							break;
 						case window.YT.PlayerState.BUFFERING:
-							console.log('Buffering');
+							//console.log('Buffering');
 							break;
 						case window.YT.PlayerState.CUED:
-							console.log('Cued');
+							//console.log('Cued');
 							break;
 					}
 				}
@@ -91,6 +95,7 @@ setPlaylist(playlistId: string, shouldPlay = false) {
 			cue,
 			() => {
 				this.updateThumbnail(); // only trust the thumbnail once genuinely CUED
+				this.player!.setLoop(this.repeatEnabled);
 				if (shouldPlay) {
 					this.pollUntil(
 						myToken,
@@ -165,6 +170,11 @@ setPlaylist(playlistId: string, shouldPlay = false) {
 		if (this.isReady && this.player) {
 			this.player.setVolume(volume);
 		}
+	}
+
+	setRepeat(enabled: boolean) {
+		this.repeatEnabled = enabled;
+		this.player?.setLoop(enabled);
 	}
 
 	private updateThumbnail() {
