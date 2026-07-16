@@ -4,9 +4,7 @@
 	import { albumArtStore } from '$lib/stores/albumArt.svelte';
 	import { fade } from 'svelte/transition';
 
-	let displayThumbnail = $derived(
-		albumArtStore.get(youtubePlayer.currentPlaylistId) ?? youtubePlayer.thumbnail
-	);
+	let displayThumbnail = $derived(albumArtStore.get(youtubePlayer.currentPlaylistId));
 </script>
 
 <div
