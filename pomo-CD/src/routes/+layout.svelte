@@ -3,6 +3,10 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import MusicSidebar from '$lib/components/music/MusicSidebar.svelte';
 	import SettingsPanel from '$lib/components/SettingsPanel.svelte';
+	import { dev } from '$app/environment';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 	let { children } = $props();
 	let my_modal_1: HTMLDialogElement | undefined = $state();
 </script>
