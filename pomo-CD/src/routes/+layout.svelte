@@ -77,7 +77,12 @@
 	</div>
 </div>
 
-<button class="btn btn-neutral btn-sm sm:btn-md top-4 right-4 fixed" onclick={() => my_modal_1?.showModal()} data-theme="luxury" aria-label="Info Box">
+<button
+	class="btn btn-neutral btn-sm sm:btn-md top-4 right-4 fixed"
+	onclick={() => my_modal_1?.showModal()}
+	data-theme="luxury"
+	aria-label="Info Box"
+>
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 		<path
 			fill-rule="evenodd"
@@ -87,10 +92,13 @@
 	</svg>
 </button>
 
-<dialog bind:this={my_modal_1} class="modal" data-theme="luxury">
+<dialog bind:this={my_modal_1} class="modal text-primary" data-theme="luxury">
 	<div class="modal-box">
 		<h3 class="text-lg font-bold">PomoCD is currently a WIP</h3>
-		<p class="py-4">PomoCD takes the best of Pomodoro Timers and CD Study Music to create an environment conducive of focused study.</p>
+		<p class="py-4">
+			PomoCD takes the best of Pomodoro Timers and CD Study Music to create an environment conducive
+			of focused study.
+		</p>
 		<p>New features will be added as they are developed, including Spotify integration.</p>
 		<div class="modal-action">
 			<form method="dialog">
