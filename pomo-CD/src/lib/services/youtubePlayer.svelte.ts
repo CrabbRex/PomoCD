@@ -10,6 +10,7 @@ class YouTubePlayerStore {
 	volume = $state(50);
 	thumbnail = $state<string | null>(null);
 	repeatEnabled = $state(true);
+	lastError = $state<string | null>(null);
 
 	player: YT.Player | null = null;
 	private pendingPlaylistId: string | null = null;
@@ -44,6 +45,7 @@ class YouTubePlayerStore {
 					},
 					onStateChange: (event: YT.OnStateChangeEvent) => {
 						console.log(event.data);
+						this.playerState = event.data;
 
 						switch (event.data) {
 							case window.YT.PlayerState.PLAYING:
@@ -66,6 +68,17 @@ class YouTubePlayerStore {
 								//console.log('Cued');
 								break;
 						}
+					},
+					onError: (event: { data: number }) => {
+						const messages: Record<number, string> = {
+							2: 'invalid video id',
+							5: 'HTML5 player error',
+							100: 'video not found',
+							101: 'embedding disabled by video owner',
+							150: 'embedding disabled by video owner'
+						};
+						this.lastError = `YT error ${event.data}: ${messages[event.data] ?? 'unknown'}`;
+						console.error(this.lastError);
 					}
 				}
 			});

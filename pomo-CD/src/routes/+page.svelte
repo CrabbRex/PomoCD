@@ -34,3 +34,12 @@
 		<div id="player" style="width:2px;height:2px;opacity:0;pointer-events:none;"></div>
 	</div>
 </main>
+
+<!-- TEMPORARY diagnostics: remove once the iOS playback issue is confirmed fixed -->
+<div
+	class="fixed bottom-2 left-2 z-50 max-w-[90vw] rounded bg-black/80 p-2 font-mono text-[10px] leading-tight text-white"
+>
+	ready: {youtubePlayer.isReady} | switching: {youtubePlayer.isSwitching}<br />
+	state: {youtubePlayer.playerState} | playlist: {youtubePlayer.currentPlaylistId}<br />
+	error: {youtubePlayer.lastError ?? 'none'}
+</div>
