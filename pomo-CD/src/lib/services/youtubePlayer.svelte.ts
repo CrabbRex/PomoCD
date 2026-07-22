@@ -3,7 +3,6 @@ const RESEND_EVERY_N_POLLS = 15;
 const MAX_POLLS = 50;
 
 class YouTubePlayerStore {
-	
 	isReady = $state(false);
 	isSwitching = $state(false);
 	currentPlaylistId = $state<string | null>(null);
@@ -20,76 +19,77 @@ class YouTubePlayerStore {
 	init() {
 		if (typeof window === 'undefined') return;
 
-	if (!window.YT) {
-		const tag = document.createElement('script');
-		tag.src = 'https://www.youtube.com/iframe_api';
-		document.body.appendChild(tag);
-	}
+		if (!window.YT) {
+			const tag = document.createElement('script');
+			tag.src = 'https://www.youtube.com/iframe_api';
+			document.body.appendChild(tag);
+		}
 
-	window.onYouTubeIframeAPIReady = () => {
-		this.player = new window.YT.Player('player', {
-			height: '0',
-			width: '0',
-			playerVars: {
-				autoplay: 1,
-				mute: 1
-			},
-			events: {
-				onReady: () => {
-					this.isReady = true;
-					if (this.pendingPlaylistId) {
-						this.setPlaylist(this.pendingPlaylistId, this.pendingShouldPlay);
-						this.pendingPlaylistId = null;
-					}
+		window.onYouTubeIframeAPIReady = () => {
+			this.player = new window.YT.Player('player', {
+				height: '2',
+				width: '2',
+				playerVars: {
+					autoplay: 1,
+					mute: 1,
+					playsinline: 1
 				},
-				onStateChange: (event: YT.OnStateChangeEvent) => {
-					console.log(event.data);
+				events: {
+					onReady: () => {
+						this.isReady = true;
+						if (this.pendingPlaylistId) {
+							this.setPlaylist(this.pendingPlaylistId, this.pendingShouldPlay);
+							this.pendingPlaylistId = null;
+						}
+					},
+					onStateChange: (event: YT.OnStateChangeEvent) => {
+						console.log(event.data);
 
-					switch (event.data) {
-						case window.YT.PlayerState.PLAYING:
-							//console.log('Playing');
-							this.updateThumbnail();
-							break;
-						case window.YT.PlayerState.PAUSED:
-							//console.log('Paused');
-							break;
-						case window.YT.PlayerState.ENDED:
-							//console.log('Ended');
-							if(!this.repeatEnabled) {
-								this.playerState = window.YT.PlayerState.ENDED;
-							}
-							break;
-						case window.YT.PlayerState.BUFFERING:
-							//console.log('Buffering');
-							break;
-						case window.YT.PlayerState.CUED:
-							//console.log('Cued');
-							break;
+						switch (event.data) {
+							case window.YT.PlayerState.PLAYING:
+								//console.log('Playing');
+								this.updateThumbnail();
+								break;
+							case window.YT.PlayerState.PAUSED:
+								//console.log('Paused');
+								break;
+							case window.YT.PlayerState.ENDED:
+								//console.log('Ended');
+								if (!this.repeatEnabled) {
+									this.playerState = window.YT.PlayerState.ENDED;
+								}
+								break;
+							case window.YT.PlayerState.BUFFERING:
+								//console.log('Buffering');
+								break;
+							case window.YT.PlayerState.CUED:
+								//console.log('Cued');
+								break;
+						}
 					}
 				}
-			}
-		});
-	};
-}
-
-setPlaylist(playlistId: string, shouldPlay = false) {
-	if (!this.isReady || !this.player) {
-		this.pendingPlaylistId = playlistId;
-		this.pendingShouldPlay = shouldPlay;
-		return;
+			});
+		};
 	}
-	const myToken = ++this.switchToken;
-	this.currentPlaylistId = playlistId;
-	this.isSwitching = true;
-	this.thumbnail = null; // "eject the CD"
 
-	const cue = () => {
-		this.player!.stopVideo();
-		this.player!.cuePlaylist({ listType: 'playlist', list: playlistId });
-	}
-	cue();
+	setPlaylist(playlistId: string, shouldPlay = false) {
+		if (!this.isReady || !this.player) {
+			this.pendingPlaylistId = playlistId;
+			this.pendingShouldPlay = shouldPlay;
+			return;
+		}
+		const myToken = ++this.switchToken;
+		this.currentPlaylistId = playlistId;
+		this.isSwitching = true;
+		this.thumbnail = null; // "eject the CD"
 
-	this.pollUntil(
+		const cue = () => {
+			this.player!.stopVideo();
+			this.player!.cuePlaylist({ listType: 'playlist', list: playlistId });
+		};
+		cue();
+
+		this.pollUntil(
 			myToken,
 			() => this.player!.getPlayerState() === window.YT.PlayerState.CUED,
 			cue,
@@ -108,9 +108,9 @@ setPlaylist(playlistId: string, shouldPlay = false) {
 				}
 			}
 		);
-}
+	}
 
-// Polls until isDone() is true, calling resend() periodically in case the
+	// Polls until isDone() is true, calling resend() periodically in case the
 	// underlying command was silently dropped (a known YouTube IFrame API quirk).
 	// Bails if a newer playlist switch has superseded this one.
 	private pollUntil(token: number, isDone: () => boolean, resend: () => void, onDone?: () => void) {

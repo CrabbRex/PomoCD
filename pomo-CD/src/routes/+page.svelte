@@ -14,7 +14,7 @@
 	});
 </script>
 
-<main class="h-dvh overflow-hidden flex flex-col" data-theme="luxury">
+<main class="h-dvh overflow-hidden flex flex-col bg-base-100" data-theme="luxury">
 	<header class="h-16 shrink-0 flex items-center justify-center px-24 sm:px-0">
 		<h1 class="text-xl sm:text-3xl font-bold truncate">PomoCD</h1>
 	</header>
@@ -31,6 +31,6 @@
 		>
 			<Timer />
 		</div>
-		<div id="player" style="width:0;height:0;"></div>
+		<div id="player" style="width:2px;height:2px;opacity:0;pointer-events:none;"></div>
 	</div>
 </main>

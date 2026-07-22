@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @plugin 'daisyui' {
-	themes: light --default, dark --prefersdark, retro, luxury;
+	themes:
+		light --default,
+		dark --prefersdark,
+		retro,
+		luxury;
 }
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
@@ -17,8 +21,4 @@
 			transform: rotate(360deg);
 		}
 	}
-}
-
-body {
-    @apply bg-blue-400;
 }
