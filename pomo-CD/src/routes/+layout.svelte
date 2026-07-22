@@ -51,7 +51,7 @@
 	<div class="drawer-content">
 		<label
 			for="settings-drawer"
-			class="btn drawer-button btn-neutral btn-sm sm:btn-md top-4 left-16 sm:left-24 fixed"
+			class="btn drawer-button btn-neutral btn-sm sm:btn-md top-4 left-20 sm:left-24 fixed"
 			aria-label="Open settings"
 		>
 			<svg
