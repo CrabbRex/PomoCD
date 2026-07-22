@@ -4,14 +4,14 @@
 	import Volume from '$lib/components/music/volume.svelte';
 </script>
 
-<div class="flex items-center justify-center gap-10">
-	<div class="flex items-center justify-center">
+<div class="flex items-center justify-center gap-6 sm:gap-10">
+	<div class="flex items-center justify-center shrink-0">
 		<Volume />
 	</div>
 
 	<div class="flex flex-col items-center justify-center gap-6">
 		<button
-			class="btn btn-neutral m-5"
+			class="btn btn-neutral m-2 sm:m-5"
 			onclick={() => youtubePlayer.previous()}
 			aria-label="Previous song"
 		>
@@ -28,7 +28,7 @@
 		</button>
 		
 		<button
-			class="btn btn-neutral btn-lg m-5"
+			class="btn btn-neutral btn-lg m-2 sm:m-5"
 			onclick={() => timer.startStop()}
 			aria-label="Previous song"
 		>
@@ -43,7 +43,7 @@
 				/>
 			</svg>
 		</button>
-        <button class="btn btn-neutral m-5" onclick={() => youtubePlayer.next()} aria-label="Next song">
+        <button class="btn btn-neutral m-2 sm:m-5" onclick={() => youtubePlayer.next()} aria-label="Next song">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"

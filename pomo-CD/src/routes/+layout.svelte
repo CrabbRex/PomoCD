@@ -18,7 +18,10 @@
 	<input id="my-drawer-1" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content">
 		<!-- Page content here -->
-		<label for="my-drawer-1" class="btn drawer-button btn-neutral top-4 left-4 fixed">
+		<label
+			for="my-drawer-1"
+			class="btn drawer-button btn-neutral btn-sm sm:btn-md top-4 left-4 fixed"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
@@ -35,7 +38,7 @@
 	</div>
 	<div class="drawer-side">
 		<label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
-		<ul class="menu bg-base-200 min-h-full w-80 p-4">
+		<ul class="menu bg-base-200 min-h-full w-80 max-w-[85vw] p-4">
 			<!-- Sidebar content here -->
 			<MusicSidebar />
 		</ul>
@@ -48,7 +51,7 @@
 	<div class="drawer-content">
 		<label
 			for="settings-drawer"
-			class="btn drawer-button btn-neutral top-4 left-24 fixed"
+			class="btn drawer-button btn-neutral btn-sm sm:btn-md top-4 left-16 sm:left-24 fixed"
 			aria-label="Open settings"
 		>
 			<svg
@@ -67,14 +70,14 @@
 	</div>
 	<div class="drawer-side">
 		<label for="settings-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-		<div class="bg-base-200 min-h-full w-80 p-4">
+		<div class="bg-base-200 min-h-full w-80 max-w-[85vw] p-4">
 			<h2 class="text-xl font-bold mb-4">Settings</h2>
 			<SettingsPanel />
 		</div>
 	</div>
 </div>
 
-<button class="btn btn-neutral top-4 right-4 fixed" onclick={() => my_modal_1?.showModal()} data-theme="luxury" aria-label="Info Box">
+<button class="btn btn-neutral btn-sm sm:btn-md top-4 right-4 fixed" onclick={() => my_modal_1?.showModal()} data-theme="luxury" aria-label="Info Box">
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 		<path
 			fill-rule="evenodd"

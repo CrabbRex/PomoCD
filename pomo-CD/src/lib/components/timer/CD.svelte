@@ -10,9 +10,13 @@
 <div
 	class="
 		aspect-square
-		w-[min(70vh,70vw)]
-		max-w-full
-		max-h-full
+		w-[min(85vw,max(8rem,calc(100dvh-30rem)),22rem)]
+		sm:w-[min(80vw,max(8rem,calc(100dvh-32rem)),27rem)]
+		max-md:landscape:w-[min(60vw,max(8rem,calc(100dvh-14rem)),26rem)]!
+		md:w-[min(58vw,max(10rem,calc(100dvh-16rem)),30rem)]
+		lg:w-[min(52vw,max(10rem,calc(100dvh-16rem)),36rem)]
+		xl:w-[min(46vw,max(10rem,calc(100dvh-16rem)),42rem)]
+		2xl:w-[min(42vw,max(10rem,calc(100dvh-16rem)),46rem)]
 		relative
 		"
 >
