@@ -9,6 +9,7 @@ class YouTubePlayerStore {
 	playerState = $state<YT.PlayerState | null>(null);
 	volume = $state(50);
 	thumbnail = $state<string | null>(null);
+	title = $state<string | null>(null);
 	repeatEnabled = $state(true);
 
 	player: YT.Player | null = null;
@@ -27,12 +28,18 @@ class YouTubePlayerStore {
 
 		window.onYouTubeIframeAPIReady = () => {
 			this.player = new window.YT.Player('player', {
-				height: '2',
-				width: '2',
+				height: '200',
+				width: '200',
 				playerVars: {
 					autoplay: 1,
 					mute: 1,
-					playsinline: 1
+					playsinline: 1,
+					controls: 0,
+					disablekb: 1,
+					fs: 0,
+					iv_load_policy: 3,
+					modestbranding: 1,
+					rel: 0
 				},
 				events: {
 					onReady: () => {
@@ -178,9 +185,11 @@ class YouTubePlayerStore {
 	}
 
 	private updateThumbnail() {
-		const videoId = this.player?.getVideoData()?.video_id;
+		const videoData = this.player?.getVideoData();
+		const videoId = videoData?.video_id;
 		if (!videoId) return;
 		this.thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+		this.title = videoData?.title || null;
 	}
 }
 
