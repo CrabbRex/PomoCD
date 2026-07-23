@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import 'tailwindcss';
 @plugin 'daisyui' {
 	themes:
@@ -11,6 +12,8 @@
 
 @theme {
 	--animate-cd-spin: cd-spin 10s linear infinite;
+	--animate-marquee: marquee 8s linear infinite;
+	--font-digital: 'VT323', monospace;
 
 	@keyframes cd-spin {
 		from {
@@ -19,6 +22,16 @@
 
 		to {
 			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes marquee {
+		from {
+			transform: translateX(100cqw);
+		}
+
+		to {
+			transform: translateX(-100%);
 		}
 	}
 }

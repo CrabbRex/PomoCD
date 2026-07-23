@@ -31,6 +31,5 @@
 		>
 			<Timer />
 		</div>
-		<div id="player" style="width:2px;height:2px;opacity:0;pointer-events:none;"></div>
 	</div>
 </main>
