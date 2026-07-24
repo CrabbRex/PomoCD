@@ -10,13 +10,13 @@
 <div
 	class="relative rounded-[2rem] p-5 sm:p-7
 	aspect-square
-	w-[min(85vw,max(8rem,calc(100dvh-30rem)),22rem)]
-	sm:w-[min(80vw,max(8rem,calc(100dvh-32rem)),27rem)]
-	max-md:landscape:w-[min(60vw,max(8rem,calc(100dvh-14rem)),26rem)]!
-	md:w-[min(58vw,max(10rem,calc(100dvh-16rem)),30rem)]
-	lg:w-[min(52vw,max(10rem,calc(100dvh-16rem)),36rem)]
-	xl:w-[min(46vw,max(10rem,calc(100dvh-16rem)),42rem)]
-	2xl:w-[min(42vw,max(10rem,calc(100dvh-16rem)),46rem)]
+	w-[min(85vw,max(8rem,calc(100dvh-42rem)),22rem)]
+	sm:w-[min(80vw,max(8rem,calc(100dvh-43rem)),27rem)]
+	max-md:landscape:w-[min(60vw,max(8rem,calc(100dvh-23rem)),26rem)]!
+	md:h-[min(100cqh,100cqw,30rem)] md:w-[min(100cqh,100cqw,30rem)]
+	lg:h-[min(100cqh,100cqw,36rem)] lg:w-[min(100cqh,100cqw,36rem)]
+	xl:h-[min(100cqh,100cqw,42rem)] xl:w-[min(100cqh,100cqw,42rem)]
+	2xl:h-[min(100cqh,100cqw,46rem)] 2xl:w-[min(100cqh,100cqw,46rem)]
 	bg-linear-to-b from-[#fafaf8] to-[#e3e1da]
 	shadow-[0_12px_28px_rgba(43,42,40,0.18),0_2px_6px_rgba(43,42,40,0.1)]
 	border border-[#c7c5be]"

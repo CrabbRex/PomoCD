@@ -5,7 +5,7 @@
 	import NowPlaying from '$lib/components/music/NowPlaying.svelte';
 </script>
 
-<div class="flex flex-col items-center justify-center gap-6 w-full">
+<div class="flex flex-col items-center justify-center md:justify-between gap-6 w-full md:h-full">
 	<div class="flex items-center justify-center gap-6 sm:gap-10">
 		<div class="flex items-center justify-center shrink-0">
 			<Volume />
@@ -32,7 +32,7 @@
 			<button
 				class="btn btn-physical btn-circle btn-sm sm:btn-md md:btn-lg m-2 sm:m-5"
 				onclick={() => timer.startStop()}
-				aria-label="Previous song"
+				aria-label="Start/Stop Timer"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

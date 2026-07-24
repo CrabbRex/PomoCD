@@ -33,6 +33,13 @@ class TimerStore {
 			: this.completedWorkSessions % this.sessionsUntilLongBreak
 	);
 
+	// which work session (1-based) is in progress, or was just completed if on a break
+	currentSessionNumber = $derived(
+		this.mode === 'work'
+			? (this.completedWorkSessions % this.sessionsUntilLongBreak) + 1
+			: this.sessionsCompletedInCycle
+	);
+
 	interval: ReturnType<typeof setInterval> | null = null;
 
 	startStop() {
