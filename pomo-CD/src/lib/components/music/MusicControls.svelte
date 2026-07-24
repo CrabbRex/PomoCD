@@ -13,7 +13,7 @@
 
 		<div class="flex flex-col items-center justify-center gap-6">
 			<button
-				class="btn btn-neutral btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
 				onclick={() => youtubePlayer.previous()}
 				aria-label="Previous song"
 			>
@@ -30,7 +30,7 @@
 			</button>
 
 			<button
-				class="btn btn-neutral btn-sm sm:btn-md md:btn-lg m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-sm sm:btn-md md:btn-lg m-2 sm:m-5"
 				onclick={() => timer.startStop()}
 				aria-label="Previous song"
 			>
@@ -46,7 +46,7 @@
 				</svg>
 			</button>
 			<button
-				class="btn btn-neutral btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
 				onclick={() => youtubePlayer.next()}
 				aria-label="Next song"
 			>

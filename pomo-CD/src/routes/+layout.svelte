@@ -14,13 +14,13 @@
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 {@render children()}
 
-<div class="drawer" data-theme="luxury">
+<div class="drawer" data-theme="discplayer">
 	<input id="my-drawer-1" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content">
 		<!-- Page content here -->
 		<label
 			for="my-drawer-1"
-			class="btn drawer-button btn-neutral btn-sm sm:btn-md top-4 left-4 fixed"
+			class="btn drawer-button btn-physical btn-circle btn-sm sm:btn-md top-4 left-4 fixed"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -46,12 +46,12 @@
 </div>
 
 <!-- Settings drawer (opens from the left) -->
-<div class="drawer" data-theme="luxury">
+<div class="drawer" data-theme="discplayer">
 	<input id="settings-drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content">
 		<label
 			for="settings-drawer"
-			class="btn drawer-button btn-neutral btn-sm sm:btn-md top-4 left-20 sm:left-24 fixed"
+			class="btn drawer-button btn-physical btn-circle btn-sm sm:btn-md top-4 left-20 sm:left-24 fixed"
 			aria-label="Open settings"
 		>
 			<svg
@@ -78,9 +78,9 @@
 </div>
 
 <button
-	class="btn btn-neutral btn-sm sm:btn-md top-4 right-4 fixed"
+	class="btn btn-physical btn-circle btn-sm sm:btn-md top-4 right-4 fixed"
 	onclick={() => my_modal_1?.showModal()}
-	data-theme="luxury"
+	data-theme="discplayer"
 	aria-label="Info Box"
 >
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -92,7 +92,7 @@
 	</svg>
 </button>
 
-<dialog bind:this={my_modal_1} class="modal text-primary" data-theme="luxury">
+<dialog bind:this={my_modal_1} class="modal text-primary" data-theme="discplayer">
 	<div class="modal-box">
 		<h3 class="text-lg font-bold">PomoCD is currently a WIP</h3>
 		<p class="py-4">
@@ -102,7 +102,7 @@
 		<p>New features will be added as they are developed, including Spotify integration.</p>
 		<div class="modal-action">
 			<form method="dialog">
-				<button class="btn">Close</button>
+				<button class="btn btn-physical">Close</button>
 			</form>
 		</div>
 	</div>

@@ -1,19 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Oswald:wght@500;600&display=swap');
 @import 'tailwindcss';
 @plugin 'daisyui' {
 	themes:
-		light --default,
+		discplayer --default,
+		light,
 		dark --prefersdark,
 		retro,
 		luxury;
 }
+@plugin 'daisyui/theme' {
+	name: 'discplayer';
+	default: true;
+	prefersdark: false;
+	color-scheme: light;
+
+	--color-base-100: #fafaf8;
+	--color-base-200: #f3f1ec;
+	--color-base-300: #c7c5be;
+	--color-base-content: #2b2a28;
+
+	--color-primary: #3a3835;
+	--color-primary-content: #fafaf8;
+
+	--color-secondary: #8a8d91;
+	--color-secondary-content: #fafaf8;
+
+	--color-accent: #8a8d91;
+	--color-accent-content: #2b2a28;
+
+	--color-neutral: #dad7cf;
+	--color-neutral-content: #2b2a28;
+
+	--color-info: #6b90a8;
+	--color-info-content: #fafaf8;
+
+	--color-success: #6f9a72;
+	--color-success-content: #fafaf8;
+
+	--color-warning: #c99a4a;
+	--color-warning-content: #2b2a28;
+
+	--color-error: #b5564b;
+	--color-error-content: #fafaf8;
+
+	--radius-selector: 0.5rem;
+	--radius-field: 0.5rem;
+	--radius-box: 1rem;
+
+	--border: 1px;
+}
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+/* Physical button pattern — raised chrome/plastic bezel with an inset
+   press state. Defined outside any @layer so it wins over daisyUI's
+   layered .btn background regardless of source order. */
+.btn-physical {
+	background: radial-gradient(120% 120% at 30% 20%, #ffffff 0%, #fafaf8 35%, #e3e1da 75%, #c7c5be 100%);
+	border: 1px solid #b7b4ac;
+	color: #3a3835;
+	box-shadow:
+		0 1px 1px rgba(255, 255, 255, 0.9) inset,
+		0 -3px 4px rgba(138, 141, 145, 0.35) inset,
+		0 3px 6px rgba(43, 42, 40, 0.18),
+		0 1px 2px rgba(43, 42, 40, 0.12);
+	transition:
+		box-shadow 0.12s ease,
+		transform 0.12s ease,
+		background 0.12s ease;
+}
+
+.btn-physical:hover {
+	background: radial-gradient(120% 120% at 30% 20%, #ffffff 0%, #fdfdfb 35%, #e8e6e0 75%, #cfccc4 100%);
+}
+
+.btn-physical:active {
+	background: radial-gradient(120% 120% at 30% 20%, #e3e1da 0%, #eceae4 60%, #f3f1ec 100%);
+	box-shadow:
+		0 2px 4px rgba(43, 42, 40, 0.28) inset,
+		0 -1px 1px rgba(255, 255, 255, 0.6) inset;
+	transform: translateY(1px);
+}
+
+.btn-physical:focus-visible {
+	outline: 2px solid #6b90a8;
+	outline-offset: 2px;
+}
 
 @theme {
 	--animate-cd-spin: cd-spin 10s linear infinite;
 	--animate-marquee: marquee 8s linear infinite;
 	--font-digital: 'VT323', monospace;
+	--font-brand: 'Oswald', sans-serif;
 
 	@keyframes cd-spin {
 		from {
@@ -33,5 +111,15 @@
 		to {
 			transform: translateX(-100%);
 		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-cd-spin {
+		animation: none;
+	}
+
+	.animate-marquee {
+		animation: none;
 	}
 }

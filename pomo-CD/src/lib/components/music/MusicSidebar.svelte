@@ -16,7 +16,7 @@
 
 	<ul class="menu gap-2">
 		{#each playlists as playlist (playlist.id)}
-			<button class="btn btn-neutral mt-5 mb-5" 
+			<button class="btn btn-physical mt-5 mb-5"
 			disabled={youtubePlayer.isSwitching}
 			onclick={() => {
 				currentPlaylist = playlist;
@@ -31,7 +31,7 @@
 
 	<div class="divider"></div>
 
-	<p class="text-sm opacity-60">
+	<p class="text-sm opacity-70">
 		Custom playlist input coming soon...
 	</p>
 

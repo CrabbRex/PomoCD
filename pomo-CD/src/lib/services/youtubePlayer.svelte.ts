@@ -184,12 +184,38 @@ class YouTubePlayerStore {
 		this.player?.setLoop(enabled);
 	}
 
+	private lastTitleVideoId: string | null = null;
+
 	private updateThumbnail() {
 		const videoData = this.player?.getVideoData();
 		const videoId = videoData?.video_id;
 		if (!videoId) return;
 		this.thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-		this.title = videoData?.title || null;
+		this.fetchTitle(videoId);
+	}
+
+	// getVideoData().title is no longer reliably populated by the YouTube
+	// IFrame API, so fetch the title via the public oEmbed endpoint instead.
+	private async fetchTitle(videoId: string) {
+		if (videoId === this.lastTitleVideoId) return;
+		this.lastTitleVideoId = videoId;
+
+		try {
+			const url = `https://www.youtube.com/oembed?url=${encodeURIComponent(
+				`https://www.youtube.com/watch?v=${videoId}`
+			)}&format=json`;
+			const res = await fetch(url);
+			if (!res.ok) throw new Error('oEmbed request failed');
+			const data = await res.json();
+
+			if (this.player?.getVideoData()?.video_id === videoId) {
+				this.title = data.title ?? null;
+			}
+		} catch {
+			if (this.player?.getVideoData()?.video_id === videoId) {
+				this.title = null;
+			}
+		}
 	}
 }
 

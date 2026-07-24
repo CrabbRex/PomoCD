@@ -13,7 +13,7 @@
 		</svg>
 	</button> -->
 	<button
-		class="btn btn-neutral btn-wide btn-xs sm:btn-sm md:btn-md"
+		class="btn btn-physical btn-wide btn-xs sm:btn-sm md:btn-md"
 		onclick={() => timer.startStop()}
 		aria-label="Start/Stop Timer"
 	>
@@ -24,7 +24,7 @@
 		</svg>
 	</button>
 	<button
-		class="btn btn-neutral btn-xs sm:btn-sm md:btn-md"
+		class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md"
 		onclick={() => {timer.skip()}}
 		aria-label="Next song"
 	>
