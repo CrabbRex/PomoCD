@@ -3,7 +3,6 @@
 
 	import { timer } from '$lib/stores/timer.svelte';
 	import CD from '$lib/components/timer/CD.svelte';
-	
 
 	onDestroy(() => {
 		timer.pause();

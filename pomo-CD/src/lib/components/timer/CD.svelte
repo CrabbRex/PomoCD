@@ -2,7 +2,8 @@
 	import { timer } from '$lib/stores/timer.svelte';
 	import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 	import { albumArtStore } from '$lib/stores/albumArt.svelte';
-	import { fade } from 'svelte/transition';
+	import CDDisc from './CDDisc.svelte';
+	import CDTray from './CDTray.svelte';
 
 	let displayThumbnail = $derived(albumArtStore.get(youtubePlayer.currentPlaylistId));
 </script>
@@ -17,7 +18,7 @@
 	md:w-[min(100cqh,100cqw,var(--cd-max-size))]
 	backdrop-blur-md
 	bg-linear-to-b from-(--material-panel-from) to-(--material-panel-to)
-	shadow-[0_12px_28px_rgba(43,42,40,0.18),0_2px_6px_rgba(43,42,40,0.1)]
+	shadow-[0_20px_40px_rgba(43,42,40,0.22),0_8px_16px_rgba(43,42,40,0.14),0_2px_4px_rgba(43,42,40,0.12),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(43,42,40,0.15)]
 	border border-(--material-seam)"
 >
 	<!-- hinge clips -->
@@ -36,51 +37,9 @@
 	<div
 		class="relative h-full w-full rounded-full p-1.5 sm:p-2 backdrop-blur-md
 		bg-linear-to-br from-(--material-rim-from) via-(--material-rim-via) to-(--material-rim-to)
-		shadow-[inset_0_6px_14px_rgba(43,42,40,0.45),inset_0_-2px_4px_rgba(255,255,255,0.5)]"
+		shadow-[inset_0_8px_18px_rgba(43,42,40,0.5),inset_0_2px_4px_rgba(43,42,40,0.35),inset_0_-2px_4px_rgba(255,255,255,0.55),inset_0_0_0_1px_rgba(255,255,255,0.15)]"
 	>
-		<div class="relative h-full w-full">
-			<div
-				class="absolute inset-0 rounded-full animate-cd-spin
-				bg-linear-to-br from-zinc-100 via-zinc-400 to-zinc-900
-				shadow-2xl border border-zinc-700"
-				style:animation-play-state={timer.isRunning ? 'running' : 'paused'}
-			>
-				<div
-					class="absolute inset-3 rounded-full overflow-hidden bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800 shadow-inner"
-				>
-					{#key displayThumbnail}
-						<div class="absolute inset-0" transition:fade={{ duration: 400 }}>
-							{#if displayThumbnail}
-								<img src={displayThumbnail} alt="" class="h-full w-full object-cover" />
-							{:else}
-								<div
-									class="h-full w-full bg-linear-to-br from-zinc-200 via-zinc-500 to-zinc-800"
-								></div>
-							{/if}
-						</div>
-					{/key}
-				</div>
-
-				<div
-					class="absolute inset-0 rounded-full opacity-25
-					bg-[conic-gradient(from_0deg,transparent,rgba(255,0,120,0.25),rgba(0,255,255,0.2),rgba(0,255,100,0.2),rgba(255,255,0,0.2),transparent)]"
-				></div>
-				<div
-					class="absolute inset-4 rounded-full opacity-30
-					bg-[repeating-radial-gradient(circle,transparent_0px,transparent_3px,rgba(255,255,255,0.05)_4px)]"
-				></div>
-				<div
-					class="absolute top-1/2 left-1/2 h-10 w-10
-					-translate-x-1/2 -translate-y-1/2
-					rounded-full shadow-inner z-20"
-				></div>
-			</div>
-			<div
-				class="pointer-events-none absolute inset-0 rounded-full
-				bg-[linear-gradient(30deg,transparent_35%,rgba(255,255,255,0.22)_48%,rgba(255,255,255,0.45)_50%,rgba(255,255,255,0.22)_52%,transparent_65%)]"
-			></div>
-
-			<div class="pointer-events-none absolute inset-0 rounded-full ring-2 ring-white/10"></div>
-		</div>
+		<CDTray />
+		<CDDisc spinning={timer.isRunning} thumbnail={displayThumbnail} />
 	</div>
 </div>

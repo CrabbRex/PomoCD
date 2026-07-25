@@ -14,7 +14,9 @@
 	</button> -->
 	<button
 		class="btn btn-physical btn-circle btn-xs sm:btn-sm"
-		onclick={() => {timer.skip()}}
+		onclick={() => {
+			timer.skip();
+		}}
 		aria-label="Skip to next phase"
 	>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">

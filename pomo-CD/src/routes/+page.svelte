@@ -41,7 +41,7 @@
 						rounded-[2rem] p-6 sm:p-8 md:h-full backdrop-blur-md
 						bg-linear-to-b from-(--material-panel-from) to-(--material-panel-to)
 						border border-(--material-seam)
-						shadow-[0_12px_28px_rgba(43,42,40,0.18),0_2px_6px_rgba(43,42,40,0.1)]"
+						shadow-[0_20px_40px_rgba(43,42,40,0.22),0_8px_16px_rgba(43,42,40,0.14),0_2px_4px_rgba(43,42,40,0.12),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(43,42,40,0.15)]"
 					>
 						<!-- hinge clip -->
 						<div

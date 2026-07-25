@@ -1,9 +1,8 @@
-import { youtubePlayer } from "$lib/services/youtubePlayer.svelte";
+import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 
 export type TimerMode = 'work' | 'shortBreak' | 'longBreak';
 
 const SESSIONS_UNTIL_LONG_BREAK = 4;
-
 
 class TimerStore {
 	mode = $state<TimerMode>('work');

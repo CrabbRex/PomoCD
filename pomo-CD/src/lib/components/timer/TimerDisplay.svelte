@@ -19,4 +19,3 @@
 	</div>
 	<SessionDots />
 </div>
-
