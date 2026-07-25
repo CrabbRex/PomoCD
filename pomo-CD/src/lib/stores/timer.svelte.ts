@@ -1,9 +1,8 @@
-import { youtubePlayer } from "$lib/services/youtubePlayer.svelte";
+import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 
 export type TimerMode = 'work' | 'shortBreak' | 'longBreak';
 
 const SESSIONS_UNTIL_LONG_BREAK = 4;
-
 
 class TimerStore {
 	mode = $state<TimerMode>('work');
@@ -31,6 +30,13 @@ class TimerStore {
 		this.completedWorkSessions > 0 && this.completedWorkSessions % this.sessionsUntilLongBreak === 0
 			? this.sessionsUntilLongBreak
 			: this.completedWorkSessions % this.sessionsUntilLongBreak
+	);
+
+	// which work session (1-based) is in progress, or was just completed if on a break
+	currentSessionNumber = $derived(
+		this.mode === 'work'
+			? (this.completedWorkSessions % this.sessionsUntilLongBreak) + 1
+			: this.sessionsCompletedInCycle
 	);
 
 	interval: ReturnType<typeof setInterval> | null = null;

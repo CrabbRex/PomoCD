@@ -19,8 +19,18 @@ declare global {
 			getVideoData(): { video_id: string };
 			nextVideo(): void;
 			previousVideo(): void;
-			loadPlaylist(playlist: { listType: string; list: string; index?: number; startSeconds?: number }): void;
-			cuePlaylist(playlist: { listType: string; list: string; index?: number; startSeconds?: number }): void;
+			loadPlaylist(playlist: {
+				listType: string;
+				list: string;
+				index?: number;
+				startSeconds?: number;
+			}): void;
+			cuePlaylist(playlist: {
+				listType: string;
+				list: string;
+				index?: number;
+				startSeconds?: number;
+			}): void;
 			getPlayerState(): PlayerState;
 			setVolume(volume: number): void;
 			setLoop(loop: boolean): void;

@@ -16,11 +16,15 @@
 
 	<ul class="menu gap-2">
 		{#each playlists as playlist (playlist.id)}
-			<button class="btn btn-neutral mt-5 mb-5" 
-			disabled={youtubePlayer.isSwitching}
-			onclick={() => {
-				currentPlaylist = playlist;
-				youtubePlayer.setPlaylist(playlist.id, timer.isRunning);}} aria-label="Select playlist">
+			<button
+				class="btn btn-physical mt-5 mb-5"
+				disabled={youtubePlayer.isSwitching}
+				onclick={() => {
+					currentPlaylist = playlist;
+					youtubePlayer.setPlaylist(playlist.id, timer.isRunning);
+				}}
+				aria-label="Select playlist"
+			>
 				{playlist.name}
 				{#if youtubePlayer.isSwitching && youtubePlayer.currentPlaylistId === playlist.id}
 					<span class="loading loading-spinner loading-xs"></span>
@@ -31,9 +35,7 @@
 
 	<div class="divider"></div>
 
-	<p class="text-sm opacity-60">
-		Custom playlist input coming soon...
-	</p>
+	<p class="text-sm opacity-70">Custom playlist input coming soon...</p>
 
 	<p>Selected: {currentPlaylist.name}</p>
 </div>

@@ -1,19 +1,255 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Oswald:wght@500;600&display=swap');
 @import 'tailwindcss';
 @plugin 'daisyui' {
 	themes:
-		light --default,
-		dark --prefersdark,
-		retro,
-		luxury;
+		discplayer --default,
+		dark --prefersdark;
+}
+@plugin 'daisyui/theme' {
+	name: 'discplayer';
+	default: true;
+	prefersdark: false;
+	color-scheme: light;
+
+	--color-base-100: #fafaf8;
+	--color-base-200: #f3f1ec;
+	--color-base-300: #c7c5be;
+	--color-base-content: #2b2a28;
+
+	--color-primary: #3a3835;
+	--color-primary-content: #fafaf8;
+
+	--color-secondary: #8a8d91;
+	--color-secondary-content: #fafaf8;
+
+	--color-accent: #8a8d91;
+	--color-accent-content: #2b2a28;
+
+	--color-neutral: #dad7cf;
+	--color-neutral-content: #2b2a28;
+
+	--color-info: #6b90a8;
+	--color-info-content: #fafaf8;
+
+	--color-success: #6f9a72;
+	--color-success-content: #fafaf8;
+
+	--color-warning: #c99a4a;
+	--color-warning-content: #2b2a28;
+
+	--color-error: #b5564b;
+	--color-error-content: #fafaf8;
+
+	--radius-selector: 0.5rem;
+	--radius-field: 0.5rem;
+	--radius-box: 1rem;
+
+	--border: 1px;
+}
+@plugin 'daisyui/theme' {
+	name: 'dark';
+	default: false;
+	prefersdark: true;
+	color-scheme: dark;
+
+	--color-base-100: #17181a;
+	--color-base-200: #101113;
+	--color-base-300: #3a3b3e;
+	--color-base-content: #e8e6e0;
+
+	--color-primary: #e8e6e0;
+	--color-primary-content: #17181a;
+
+	--color-secondary: #6a6d71;
+	--color-secondary-content: #e8e6e0;
+
+	--color-accent: #6a6d71;
+	--color-accent-content: #e8e6e0;
+
+	--color-neutral: #232427;
+	--color-neutral-content: #e8e6e0;
+
+	--color-info: #6b90a8;
+	--color-info-content: #17181a;
+
+	--color-success: #6f9a72;
+	--color-success-content: #17181a;
+
+	--color-warning: #c99a4a;
+	--color-warning-content: #17181a;
+
+	--color-error: #b5564b;
+	--color-error-content: #17181a;
+
+	--radius-selector: 0.5rem;
+	--radius-field: 0.5rem;
+	--radius-box: 1rem;
+
+	--border: 1px;
 }
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+/* Material tokens — the "chassis" gradient/trim colors shared by the CD bay,
+   controls casing, chrome rims and hinge clips. Swapping these per theme is
+   what turns the opaque warm-white plastic into translucent smoky acrylic;
+   everything else (LCD screens, disc surface) stays theme-invariant. */
+:root {
+	--material-panel-from: #fafaf8;
+	--material-panel-to: #e3e1da;
+	--material-seam: #c7c5be;
+	--material-rim-from: #dad7cf;
+	--material-rim-via: #8a8d91;
+	--material-rim-to: #6a6d71;
+}
+
+/* Fluid size caps used by the md:+ responsive layout — kept as custom
+   properties (not repeated per-component) so the row height cap
+   (+page.svelte) and the CD's own size cap (CD.svelte) can't drift out of
+   sync, and so the Now Playing thumbnail and compact volume slider (which
+   intentionally share one scale) stay identical. */
+:root {
+	--cd-max-size: clamp(30rem, calc(33.333vw + 14rem), 46rem);
+	--compact-control-size: clamp(8rem, calc(12.5vw + 2rem), 12rem);
+}
+
+[data-theme='dark'] {
+	--material-panel-from: rgb(70 71 76 / 0.4);
+	--material-panel-to: rgb(20 20 23 / 0.26);
+	--material-seam: rgb(140 142 148 / 0.28);
+	--material-rim-from: rgb(150 152 158 / 0.42);
+	--material-rim-via: rgb(90 92 98 / 0.4);
+	--material-rim-to: rgb(30 31 35 / 0.42);
+}
+
+/* Dark theme pushes translucency further than the utility default — the
+   see-through acrylic read needs more blur than backdrop-blur-md gives. */
+[data-theme='dark'] .backdrop-blur-md {
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+}
+
+/* "Visible internals" backdrop glow behind the translucent dark panels —
+   targets the base-100 fill directly since <main> covers the viewport.
+   Ambient blobs (page-level glow) plus small pinpoint "component" glows
+   and a faint trace grid, so it reads as a rough circuit board rather than
+   just soft light. */
+[data-theme='dark'] .bg-base-100 {
+	background-image:
+		radial-gradient(ellipse 45% 30% at 15% 12%, rgb(107 144 168 / 0.26), transparent),
+		radial-gradient(ellipse 35% 25% at 82% 78%, rgb(111 154 114 / 0.24), transparent),
+		radial-gradient(circle 6% at 68% 22%, rgb(201 154 74 / 0.28), transparent),
+		radial-gradient(circle 5% at 30% 85%, rgb(181 86 75 / 0.24), transparent),
+		radial-gradient(circle 7% at 90% 38%, rgb(107 144 168 / 0.24), transparent),
+		repeating-linear-gradient(
+			90deg,
+			rgb(232 230 224 / 0.025) 0px,
+			rgb(232 230 224 / 0.025) 1px,
+			transparent 1px,
+			transparent 48px
+		),
+		repeating-linear-gradient(
+			0deg,
+			rgb(232 230 224 / 0.025) 0px,
+			rgb(232 230 224 / 0.025) 1px,
+			transparent 1px,
+			transparent 48px
+		);
+}
+
+/* Physical button pattern — raised chrome/plastic bezel with an inset
+   press state. Defined outside any @layer so it wins over daisyUI's
+   layered .btn background regardless of source order. */
+.btn-physical {
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		#ffffff 0%,
+		#fafaf8 35%,
+		#e3e1da 75%,
+		#c7c5be 100%
+	);
+	border: 1px solid #b7b4ac;
+	color: #3a3835;
+	box-shadow:
+		0 1px 1px rgba(255, 255, 255, 0.9) inset,
+		0 -3px 4px rgba(138, 141, 145, 0.35) inset,
+		0 3px 6px rgba(43, 42, 40, 0.18),
+		0 1px 2px rgba(43, 42, 40, 0.12);
+	transition:
+		box-shadow 0.12s ease,
+		transform 0.12s ease,
+		background 0.12s ease;
+}
+
+.btn-physical:hover {
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		#ffffff 0%,
+		#fdfdfb 35%,
+		#e8e6e0 75%,
+		#cfccc4 100%
+	);
+}
+
+.btn-physical:active {
+	background: radial-gradient(120% 120% at 30% 20%, #e3e1da 0%, #eceae4 60%, #f3f1ec 100%);
+	box-shadow:
+		0 2px 4px rgba(43, 42, 40, 0.28) inset,
+		0 -1px 1px rgba(255, 255, 255, 0.6) inset;
+	transform: translateY(1px);
+}
+
+.btn-physical:focus-visible {
+	outline: 2px solid #6b90a8;
+	outline-offset: 2px;
+}
+
+/* Dark theme's smoky-acrylic take on the same bezel — gunmetal glass instead
+   of white plastic, translucent so the page glow behind it still shows. */
+[data-theme='dark'] .btn-physical {
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		rgb(120 122 128 / 0.6) 0%,
+		rgb(70 71 76 / 0.55) 35%,
+		rgb(30 31 34 / 0.55) 75%,
+		rgb(15 16 18 / 0.6) 100%
+	);
+	border: 1px solid rgb(150 152 158 / 0.4);
+	color: #e8e6e0;
+	box-shadow:
+		0 1px 1px rgba(255, 255, 255, 0.15) inset,
+		0 -3px 4px rgba(0, 0, 0, 0.35) inset,
+		0 3px 6px rgba(0, 0, 0, 0.4),
+		0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .btn-physical:hover {
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		rgb(140 142 148 / 0.65) 0%,
+		rgb(85 87 92 / 0.6) 35%,
+		rgb(38 39 42 / 0.6) 75%,
+		rgb(20 21 23 / 0.65) 100%
+	);
+}
+
+[data-theme='dark'] .btn-physical:active {
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		rgb(20 21 23 / 0.6) 0%,
+		rgb(45 46 50 / 0.55) 60%,
+		rgb(70 71 76 / 0.5) 100%
+	);
+	box-shadow:
+		0 2px 4px rgba(0, 0, 0, 0.5) inset,
+		0 -1px 1px rgba(255, 255, 255, 0.1) inset;
+}
 
 @theme {
 	--animate-cd-spin: cd-spin 10s linear infinite;
 	--animate-marquee: marquee 8s linear infinite;
 	--font-digital: 'VT323', monospace;
+	--font-brand: 'Oswald', sans-serif;
 
 	@keyframes cd-spin {
 		from {
@@ -33,5 +269,15 @@
 		to {
 			transform: translateX(-100%);
 		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-cd-spin {
+		animation: none;
+	}
+
+	.animate-marquee {
+		animation: none;
 	}
 }

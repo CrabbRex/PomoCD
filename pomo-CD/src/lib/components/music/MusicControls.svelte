@@ -1,19 +1,44 @@
-<script>
+<script lang="ts">
 	import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 	import { timer } from '$lib/stores/timer.svelte';
 	import Volume from '$lib/components/music/volume.svelte';
 	import NowPlaying from '$lib/components/music/NowPlaying.svelte';
+
+	// Below this rendered height, the stacked button column (~20.5rem natural
+	// height at md: size) can't fit without clipping — switch to a compact
+	// horizontal layout instead of letting it scroll. Set with margin above
+	// compact mode's own ~21rem floor, so overflow-y-auto below is a true
+	// last resort, not the common case.
+	const COMPACT_HEIGHT_THRESHOLD = 400; // px, ~25rem
+	const MD_BREAKPOINT = 768; // px — matches Tailwind's `md:`; below this, mobile/landscape layouts already handle their own fit
+
+	let rootEl: HTMLDivElement | undefined = $state();
+	let isCompact = $state(false);
+
+	$effect(() => {
+		if (!rootEl) return;
+		const el = rootEl;
+		const observer = new ResizeObserver((entries) => {
+			const height = entries[0].contentRect.height;
+			isCompact = window.innerWidth >= MD_BREAKPOINT && height < COMPACT_HEIGHT_THRESHOLD;
+		});
+		observer.observe(el);
+		return () => observer.disconnect();
+	});
 </script>
 
-<div class="flex flex-col items-center justify-center gap-6 w-full">
-	<div class="flex items-center justify-center gap-6 sm:gap-10">
+<div bind:this={rootEl} class="flex flex-col items-center justify-center gap-6 w-full md:h-full">
+	<div
+		class="flex items-center justify-center gap-6 sm:gap-10 flex-wrap
+		md:flex-1 md:min-h-0 md:w-full md:overflow-y-auto md:overscroll-y-contain"
+	>
 		<div class="flex items-center justify-center shrink-0">
-			<Volume />
+			<Volume {isCompact} />
 		</div>
 
-		<div class="flex flex-col items-center justify-center gap-6">
+		<div class="flex items-center justify-center gap-6 {isCompact ? '' : 'flex-col'}">
 			<button
-				class="btn btn-neutral btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
 				onclick={() => youtubePlayer.previous()}
 				aria-label="Previous song"
 			>
@@ -30,9 +55,9 @@
 			</button>
 
 			<button
-				class="btn btn-neutral btn-sm sm:btn-md md:btn-lg m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-sm sm:btn-md md:btn-lg m-2 sm:m-5"
 				onclick={() => timer.startStop()}
-				aria-label="Previous song"
+				aria-label="Start/Stop Timer"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +71,7 @@
 				</svg>
 			</button>
 			<button
-				class="btn btn-neutral btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
 				onclick={() => youtubePlayer.next()}
 				aria-label="Next song"
 			>
@@ -64,5 +89,7 @@
 		</div>
 	</div>
 
-	<NowPlaying />
+	<div class="w-full md:shrink-0">
+		<NowPlaying />
+	</div>
 </div>
