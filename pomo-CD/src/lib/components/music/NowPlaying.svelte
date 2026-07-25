@@ -4,15 +4,15 @@
 
 <div class="flex items-center gap-4 w-full">
 	<div
-		class="shrink-0 rounded-xl p-1.5 sm:p-2
-		bg-linear-to-br from-[#dad7cf] via-[#8a8d91] to-[#6a6d71]
+		class="shrink-0 rounded-xl p-1.5 sm:p-2 backdrop-blur-md
+		bg-linear-to-br from-(--material-rim-from) via-(--material-rim-via) to-(--material-rim-to)
 		shadow-[inset_0_3px_6px_rgba(43,42,40,0.4),inset_0_-1px_2px_rgba(255,255,255,0.5),0_4px_10px_rgba(43,42,40,0.15)]"
 	>
 		<div
-			class="rounded-lg overflow-hidden bg-black pointer-events-none"
-			style="width:200px;height:200px;"
+			class="rounded-lg overflow-hidden bg-black pointer-events-none
+			aspect-square h-24 sm:h-28 md:h-[clamp(8rem,calc(12.5vw_+_2rem),12rem)]"
 		>
-			<div id="player"></div>
+			<div id="player" class="h-full w-full"></div>
 		</div>
 	</div>
 	<div class="flex-1 min-w-0">

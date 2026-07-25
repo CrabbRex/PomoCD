@@ -28,8 +28,8 @@ class YouTubePlayerStore {
 
 		window.onYouTubeIframeAPIReady = () => {
 			this.player = new window.YT.Player('player', {
-				height: '200',
-				width: '200',
+				height: '100%',
+				width: '100%',
 				playerVars: {
 					autoplay: 1,
 					mute: 1,

@@ -5,8 +5,11 @@
 	import NowPlaying from '$lib/components/music/NowPlaying.svelte';
 </script>
 
-<div class="flex flex-col items-center justify-center md:justify-between gap-6 w-full md:h-full">
-	<div class="flex items-center justify-center gap-6 sm:gap-10">
+<div class="flex flex-col items-center justify-center gap-6 w-full md:h-full">
+	<div
+		class="flex items-center justify-center gap-6 sm:gap-10
+		md:flex-1 md:min-h-0 md:w-full md:overflow-y-auto md:overscroll-y-contain"
+	>
 		<div class="flex items-center justify-center shrink-0">
 			<Volume />
 		</div>
@@ -64,5 +67,7 @@
 		</div>
 	</div>
 
-	<NowPlaying />
+	<div class="w-full md:shrink-0">
+		<NowPlaying />
+	</div>
 </div>

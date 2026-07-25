@@ -10,33 +10,32 @@
 <div
 	class="relative rounded-[2rem] p-5 sm:p-7
 	aspect-square
-	w-[min(85vw,max(8rem,calc(100dvh-42rem)),22rem)]
-	sm:w-[min(80vw,max(8rem,calc(100dvh-43rem)),27rem)]
-	max-md:landscape:w-[min(60vw,max(8rem,calc(100dvh-23rem)),26rem)]!
-	md:h-[min(100cqh,100cqw,30rem)] md:w-[min(100cqh,100cqw,30rem)]
-	lg:h-[min(100cqh,100cqw,36rem)] lg:w-[min(100cqh,100cqw,36rem)]
-	xl:h-[min(100cqh,100cqw,42rem)] xl:w-[min(100cqh,100cqw,42rem)]
-	2xl:h-[min(100cqh,100cqw,46rem)] 2xl:w-[min(100cqh,100cqw,46rem)]
-	bg-linear-to-b from-[#fafaf8] to-[#e3e1da]
+	w-[min(85cqw,max(8rem,calc(100dvh-42rem)),22rem)]
+	sm:w-[min(80cqw,max(8rem,calc(100dvh-43rem)),27rem)]
+	max-md:landscape:w-[min(60cqw,max(8rem,calc(100dvh-23rem)),26rem)]!
+	md:h-[min(100cqh,100cqw,clamp(30rem,calc(33.333vw_+_14rem),46rem))]
+	md:w-[min(100cqh,100cqw,clamp(30rem,calc(33.333vw_+_14rem),46rem))]
+	backdrop-blur-md
+	bg-linear-to-b from-(--material-panel-from) to-(--material-panel-to)
 	shadow-[0_12px_28px_rgba(43,42,40,0.18),0_2px_6px_rgba(43,42,40,0.1)]
-	border border-[#c7c5be]"
+	border border-(--material-seam)"
 >
 	<!-- hinge clips -->
 	<div
 		class="absolute top-0 left-8 sm:left-10 h-3 w-8 sm:h-4 sm:w-10 rounded-b-md
-		bg-linear-to-b from-[#fafaf8] via-[#c7c5be] to-[#8a8d91]
-		shadow-[0_2px_3px_rgba(43,42,40,0.25)] border border-[#8a8d91]"
+		bg-linear-to-b from-(--material-panel-from) via-(--material-seam) to-(--material-rim-via)
+		shadow-[0_2px_3px_rgba(43,42,40,0.25)] border border-(--material-rim-via)"
 	></div>
 	<div
 		class="absolute top-0 right-8 sm:right-10 h-3 w-8 sm:h-4 sm:w-10 rounded-b-md
-		bg-linear-to-b from-[#fafaf8] via-[#c7c5be] to-[#8a8d91]
-		shadow-[0_2px_3px_rgba(43,42,40,0.25)] border border-[#8a8d91]"
+		bg-linear-to-b from-(--material-panel-from) via-(--material-seam) to-(--material-rim-via)
+		shadow-[0_2px_3px_rgba(43,42,40,0.25)] border border-(--material-rim-via)"
 	></div>
 
 	<!-- chrome rim / recessed pocket -->
 	<div
-		class="relative h-full w-full rounded-full p-1.5 sm:p-2
-		bg-linear-to-br from-[#dad7cf] via-[#8a8d91] to-[#6a6d71]
+		class="relative h-full w-full rounded-full p-1.5 sm:p-2 backdrop-blur-md
+		bg-linear-to-br from-(--material-rim-from) via-(--material-rim-via) to-(--material-rim-to)
 		shadow-[inset_0_6px_14px_rgba(43,42,40,0.45),inset_0_-2px_4px_rgba(255,255,255,0.5)]"
 	>
 		<div class="relative h-full w-full">
