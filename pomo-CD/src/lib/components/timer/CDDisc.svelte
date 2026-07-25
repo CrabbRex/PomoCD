@@ -34,7 +34,7 @@
 			bg-[repeating-radial-gradient(circle,transparent_0px,transparent_3px,rgba(255,255,255,0.05)_4px)]"
 		></div>
 		<div
-			class="absolute top-1/2 left-1/2 w-[18%] aspect-square
+			class="absolute top-1/2 left-1/2 w-[13%] aspect-square
 			-translate-x-1/2 -translate-y-1/2
 			rounded-full z-20
 			bg-linear-to-br from-zinc-50 via-zinc-300 to-zinc-500

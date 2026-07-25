@@ -23,8 +23,8 @@ export const playlists: Playlist[] = [
 		album: 'Bewitched'
 	},
 	{
-		id: 'PLxA687tYuMWjmOW3x8W49Z4sCgzVNkNVl',
-		name: 'The Art of Living',
+		id: 'PLetgZKHHaF-ZyW8caML6cB6XE_rapKpjE',
+		name: 'The Art of Loving',
 		description: '',
 		artist: 'Olivia Dean',
 		album: 'The Art Of Loving'
