@@ -103,6 +103,16 @@
 	--material-rim-to: #6a6d71;
 }
 
+/* Fluid size caps used by the md:+ responsive layout — kept as custom
+   properties (not repeated per-component) so the row height cap
+   (+page.svelte) and the CD's own size cap (CD.svelte) can't drift out of
+   sync, and so the Now Playing thumbnail and compact volume slider (which
+   intentionally share one scale) stay identical. */
+:root {
+	--cd-max-size: clamp(30rem, calc(33.333vw + 14rem), 46rem);
+	--compact-control-size: clamp(8rem, calc(12.5vw + 2rem), 12rem);
+}
+
 [data-theme='dark'] {
 	--material-panel-from: rgb(70 71 76 / 0.55);
 	--material-panel-to: rgb(20 20 23 / 0.4);
@@ -124,7 +134,13 @@
    press state. Defined outside any @layer so it wins over daisyUI's
    layered .btn background regardless of source order. */
 .btn-physical {
-	background: radial-gradient(120% 120% at 30% 20%, #ffffff 0%, #fafaf8 35%, #e3e1da 75%, #c7c5be 100%);
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		#ffffff 0%,
+		#fafaf8 35%,
+		#e3e1da 75%,
+		#c7c5be 100%
+	);
 	border: 1px solid #b7b4ac;
 	color: #3a3835;
 	box-shadow:
@@ -139,7 +155,13 @@
 }
 
 .btn-physical:hover {
-	background: radial-gradient(120% 120% at 30% 20%, #ffffff 0%, #fdfdfb 35%, #e8e6e0 75%, #cfccc4 100%);
+	background: radial-gradient(
+		120% 120% at 30% 20%,
+		#ffffff 0%,
+		#fdfdfb 35%,
+		#e8e6e0 75%,
+		#cfccc4 100%
+	);
 }
 
 .btn-physical:active {

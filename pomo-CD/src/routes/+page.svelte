@@ -30,7 +30,7 @@
 		px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
 	>
 		<div
-			class="w-full flex flex-col max-md:landscape:flex-row md:flex-row items-center max-md:landscape:items-stretch md:items-stretch gap-8 max-md:landscape:gap-0 md:gap-0 max-md:landscape:h-[min(max(8rem,calc(100dvh-23rem)),26rem)] max-md:landscape:shrink-0 md:h-[min(max(8rem,calc(100dvh-13rem)),clamp(30rem,calc(33.333vw_+_14rem),46rem))] md:shrink-0"
+			class="w-full flex flex-col max-md:landscape:flex-row md:flex-row items-center max-md:landscape:items-stretch md:items-stretch gap-8 max-md:landscape:gap-0 md:gap-0 max-md:landscape:h-[min(max(8rem,calc(100dvh-23rem)),26rem)] max-md:landscape:shrink-0 md:h-[min(max(8rem,calc(100dvh-13rem)),var(--cd-max-size))] md:shrink-0"
 		>
 			<div
 				class="order-2 max-md:landscape:order-1 md:order-1 w-full max-md:landscape:basis-1/3 md:basis-1/3 md:min-w-[17rem] flex justify-center items-center max-md:landscape:items-start md:items-stretch max-md:landscape:overflow-y-auto max-md:landscape:overscroll-y-contain shrink-0"

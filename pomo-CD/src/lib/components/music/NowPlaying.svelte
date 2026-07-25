@@ -10,7 +10,7 @@
 	>
 		<div
 			class="rounded-lg overflow-hidden bg-black pointer-events-none
-			aspect-square h-24 sm:h-28 md:h-[clamp(8rem,calc(12.5vw_+_2rem),12rem)]"
+			aspect-square h-24 sm:h-28 md:h-[var(--compact-control-size)]"
 		>
 			<div id="player" class="h-full w-full"></div>
 		</div>

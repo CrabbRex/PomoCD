@@ -13,8 +13,8 @@
 	w-[min(85cqw,max(8rem,calc(100dvh-42rem)),22rem)]
 	sm:w-[min(80cqw,max(8rem,calc(100dvh-43rem)),27rem)]
 	max-md:landscape:w-[min(60cqw,max(8rem,calc(100dvh-23rem)),26rem)]!
-	md:h-[min(100cqh,100cqw,clamp(30rem,calc(33.333vw_+_14rem),46rem))]
-	md:w-[min(100cqh,100cqw,clamp(30rem,calc(33.333vw_+_14rem),46rem))]
+	md:h-[min(100cqh,100cqw,var(--cd-max-size))]
+	md:w-[min(100cqh,100cqw,var(--cd-max-size))]
 	backdrop-blur-md
 	bg-linear-to-b from-(--material-panel-from) to-(--material-panel-to)
 	shadow-[0_12px_28px_rgba(43,42,40,0.18),0_2px_6px_rgba(43,42,40,0.1)]
