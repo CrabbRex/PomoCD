@@ -6,18 +6,19 @@
 
 	// Below this rendered height, the stacked button column (~20.5rem natural
 	// height at md: size) can't fit without clipping — switch to a compact
-	// horizontal layout instead of letting it scroll. Set with margin above
-	// compact mode's own ~21rem floor, so overflow-y-auto below is a true
-	// last resort, not the common case.
-	const COMPACT_HEIGHT_THRESHOLD = 400; // px, ~25rem
+	// horizontal layout instead of letting it scroll. Measured directly on
+	// the button+volume row (not the whole component), so this is a small
+	// buffer above that row's own natural floor, not a proxy via sibling
+	// content (Now Playing) height.
+	const COMPACT_HEIGHT_THRESHOLD = 340; // px, ~21.25rem
 	const MD_BREAKPOINT = 768; // px — matches Tailwind's `md:`; below this, mobile/landscape layouts already handle their own fit
 
-	let rootEl: HTMLDivElement | undefined = $state();
+	let rowEl: HTMLDivElement | undefined = $state();
 	let isCompact = $state(false);
 
 	$effect(() => {
-		if (!rootEl) return;
-		const el = rootEl;
+		if (!rowEl) return;
+		const el = rowEl;
 		const observer = new ResizeObserver((entries) => {
 			const height = entries[0].contentRect.height;
 			isCompact = window.innerWidth >= MD_BREAKPOINT && height < COMPACT_HEIGHT_THRESHOLD;
@@ -27,9 +28,10 @@
 	});
 </script>
 
-<div bind:this={rootEl} class="flex flex-col items-center justify-center gap-6 w-full md:h-full">
+<div class="flex flex-col items-center md:justify-between justify-center gap-6 w-full md:h-full">
 	<div
-		class="flex items-center justify-center gap-6 sm:gap-10 flex-wrap
+		bind:this={rowEl}
+		class="flex items-center justify-center content-center gap-6 sm:gap-10 flex-wrap
 		md:flex-1 md:min-h-0 md:w-full md:overflow-y-auto md:overscroll-y-contain"
 	>
 		<div class="flex items-center justify-center shrink-0">
@@ -38,7 +40,7 @@
 
 		<div class="flex items-center justify-center gap-6 {isCompact ? '' : 'flex-col'}">
 			<button
-				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md"
 				onclick={() => youtubePlayer.previous()}
 				aria-label="Previous song"
 			>
@@ -55,7 +57,7 @@
 			</button>
 
 			<button
-				class="btn btn-physical btn-circle btn-sm sm:btn-md md:btn-lg m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-sm sm:btn-md md:btn-lg"
 				onclick={() => timer.startStop()}
 				aria-label="Start/Stop Timer"
 			>
@@ -71,7 +73,7 @@
 				</svg>
 			</button>
 			<button
-				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md m-2 sm:m-5"
+				class="btn btn-physical btn-circle btn-xs sm:btn-sm md:btn-md"
 				onclick={() => youtubePlayer.next()}
 				aria-label="Next song"
 			>
