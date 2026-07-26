@@ -163,7 +163,7 @@
 	}
 
 	.genre-card:focus-visible {
-		outline: 2px solid #6b90a8;
+		outline: 2px solid var(--color-info);
 		outline-offset: 2px;
 	}
 
@@ -185,7 +185,7 @@
 		transform: translateY(-2px);
 		box-shadow:
 			0 4px 8px rgba(0, 0, 0, 0.5),
-			0 0 0 2px rgba(240, 201, 135, 0.85);
+			0 0 0 2px color-mix(in srgb, var(--color-warning) 85%, transparent);
 	}
 
 	.genre-card--active:hover {

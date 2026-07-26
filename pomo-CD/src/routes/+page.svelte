@@ -9,7 +9,9 @@
 
 	let { data } = $props();
 
-	albumArtStore.hydrate(data.albumArt);
+	$effect(() => {
+		albumArtStore.hydrate(data.albumArt);
+	});
 
 	onMount(() => {
 		youtubePlayer.init();

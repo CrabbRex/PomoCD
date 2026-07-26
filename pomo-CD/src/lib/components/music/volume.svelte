@@ -14,10 +14,8 @@
 			type="range"
 			min="0"
 			max="100"
-			bind:value={youtubePlayer.volume}
-			oninput={() => {
-				youtubePlayer.setVolume(youtubePlayer.volume);
-			}}
+			value={youtubePlayer.volume}
+			oninput={(e) => youtubePlayer.setVolume(Number(e.currentTarget.value))}
 			class="range range-sm sm:range-md lg:range-lg
 			{isCompact
 				? 'md:w-[var(--compact-control-size)]'
