@@ -8,6 +8,12 @@
 
 	let currentPlaylist = $state(playlists[0]);
 
+	let genres = $derived([...new Set(playlists.map((p) => p.genre))]);
+	let selectedGenre = $state<string>('All');
+	let filteredPlaylists = $derived(
+		selectedGenre === 'All' ? playlists : playlists.filter((p) => p.genre === selectedGenre)
+	);
+
 	onMount(() => {
 		youtubePlayer.setPlaylist(currentPlaylist.id, false);
 	});
@@ -27,13 +33,41 @@
 	<div class="relative flex flex-1 flex-col overflow-y-auto p-4 pr-4 pl-6 text-white">
 		<h2 class="mb-4 text-xl font-bold">Music Library</h2>
 
+		<!-- Genre divider cards — genre-filter-plan.md Step 3, restyled after a
+		     record-shelf divider-card reference photo: a thick-bordered card
+		     standing taller than the rack rows below, label running sideways
+		     along the spine, selecting one inverts it to a solid black card
+		     ("Concept L"). -->
+		<div class="mb-3 flex flex-wrap items-end gap-1.5" role="group" aria-label="Filter by genre">
+			<button
+				type="button"
+				class="genre-card"
+				class:genre-card--active={selectedGenre === 'All'}
+				aria-pressed={selectedGenre === 'All'}
+				onclick={() => (selectedGenre = 'All')}
+			>
+				<span class="genre-card__label">All</span>
+			</button>
+			{#each genres as genre (genre)}
+				<button
+					type="button"
+					class="genre-card"
+					class:genre-card--active={selectedGenre === genre}
+					aria-pressed={selectedGenre === genre}
+					onclick={() => (selectedGenre = genre)}
+				>
+					<span class="genre-card__label">{genre}</span>
+				</button>
+			{/each}
+		</div>
+
 		<!-- Recessed compartment for the spine stack, sunk into the wood
 		     carcass above — faint wire-rung lines behind the rows. -->
 		<div
 			class="cd-tower__rungs relative flex flex-col gap-2 rounded-sm p-2
 				shadow-[inset_0_3px_8px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(0,0,0,0.4)]"
 		>
-			{#each playlists as playlist, index (playlist.id)}
+			{#each filteredPlaylists as playlist, index (playlist.id)}
 				<CDRackSlot
 					{playlist}
 					{index}
@@ -43,6 +77,8 @@
 					disabled={youtubePlayer.isSwitching}
 					onselect={() => selectPlaylist(playlist)}
 				/>
+			{:else}
+				<p class="py-2 text-center text-sm text-white/50">No playlists in this genre yet.</p>
 			{/each}
 		</div>
 
@@ -97,6 +133,67 @@
 			var(--wood-grain) 3px,
 			var(--wood-grain) 4px
 		);
+	}
+
+	/* Genre divider card — thick-bordered card standing taller than the rack
+	   rows, label rotated to read sideways along the spine like a real
+	   record-shelf divider. Selecting one is a persistent "currently
+	   filtering by this genre" state, so it inverts to a solid black card
+	   rather than reusing any momentary press feedback. */
+	.genre-card {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: 1.85rem;
+		height: 4rem;
+		border-radius: 4px;
+		border: 3px solid #141414;
+		background: #f2f1ec;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+		transition:
+			background 0.15s ease,
+			border-color 0.15s ease,
+			transform 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+
+	.genre-card:hover {
+		transform: translateY(-1px);
+	}
+
+	.genre-card:focus-visible {
+		outline: 2px solid #6b90a8;
+		outline-offset: 2px;
+	}
+
+	.genre-card__label {
+		display: inline-block;
+		white-space: nowrap;
+		transform: rotate(-90deg);
+		font-size: 0.6rem;
+		font-weight: 800;
+		letter-spacing: -0.01em;
+		text-transform: uppercase;
+		color: #141414;
+		transition: color 0.15s ease;
+	}
+
+	.genre-card--active {
+		background: #141414;
+		border-color: #141414;
+		transform: translateY(-2px);
+		box-shadow:
+			0 4px 8px rgba(0, 0, 0, 0.5),
+			0 0 0 2px rgba(240, 201, 135, 0.85);
+	}
+
+	.genre-card--active:hover {
+		transform: translateY(-2px);
+	}
+
+	.genre-card--active .genre-card__label {
+		color: #f2f1ec;
 	}
 
 	/* Faint horizontal wire-rung lines behind the spine stack, evoking the
