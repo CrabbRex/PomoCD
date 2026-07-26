@@ -17,7 +17,7 @@
 				type="number"
 				min="1"
 				class="input input-bordered input-sm w-24"
-				bind:value={timer.durationMinutes[mode]}
+				value={timer.durationMinutes[mode]}
 				oninput={(e) => timer.setDuration(mode, Number(e.currentTarget.value))}
 			/>
 		</label>

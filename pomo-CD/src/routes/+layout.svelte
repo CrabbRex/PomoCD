@@ -66,10 +66,9 @@
 	</div>
 	<div class="drawer-side">
 		<label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
-		<ul class="menu bg-base-200 min-h-full w-80 max-w-[85vw] p-4">
-			<!-- Sidebar content here -->
+		<div class="h-full w-80 max-w-[85vw] self-stretch">
 			<MusicSidebar />
-		</ul>
+		</div>
 	</div>
 </div>
 

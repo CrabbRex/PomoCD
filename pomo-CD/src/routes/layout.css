@@ -103,6 +103,17 @@
 	--material-rim-to: #6a6d71;
 }
 
+/* Wood-tower tokens (cd-rack-redesign-plan.md Step 8b) — solid opaque frame,
+   unlike the acrylic --material-* set it does not need a translucent
+   dark-mode override, real wood looks the same regardless of theme. */
+:root {
+	--wood-from: #5a3d28;
+	--wood-via: #432c1b;
+	--wood-to: #2e1c11;
+	--wood-grain: rgb(0 0 0 / 0.18);
+	--wood-highlight: rgb(255 220 180 / 0.12);
+}
+
 /* Fluid size caps used by the md:+ responsive layout — kept as custom
    properties (not repeated per-component) so the row height cap
    (+page.svelte) and the CD's own size cap (CD.svelte) can't drift out of
@@ -200,7 +211,7 @@
 }
 
 .btn-physical:focus-visible {
-	outline: 2px solid #6b90a8;
+	outline: 2px solid var(--color-info);
 	outline-offset: 2px;
 }
 
