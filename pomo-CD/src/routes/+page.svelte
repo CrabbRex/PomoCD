@@ -35,7 +35,7 @@
 			class="w-full flex flex-col max-md:landscape:flex-row md:flex-row items-center max-md:landscape:items-stretch md:items-stretch gap-8 max-md:landscape:gap-0 md:gap-0 max-md:landscape:h-[min(max(8rem,calc(100dvh-23rem)),26rem)] max-md:landscape:shrink-0 md:h-[min(max(8rem,calc(100dvh-13rem)),var(--cd-max-size))] md:shrink-0"
 		>
 			<div
-				class="order-2 max-md:landscape:order-1 md:order-1 w-full max-md:landscape:basis-1/3 md:basis-1/3 md:min-w-[17rem] flex justify-center items-center max-md:landscape:items-start md:items-stretch max-md:landscape:overflow-y-auto max-md:landscape:overscroll-y-contain shrink-0 md:[container-type:size]"
+				class="order-2 max-md:landscape:order-1 md:order-1 w-full max-md:landscape:basis-1/3 md:basis-1/3 md:min-w-[17rem] flex justify-center items-center max-md:landscape:items-start md:items-stretch max-md:landscape:overflow-y-auto max-md:landscape:overscroll-y-contain shrink-0 [container-type:inline-size] md:[container-type:size]"
 			>
 				<div class="relative w-full max-w-lg mx-auto">
 					<div
