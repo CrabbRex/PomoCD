@@ -51,8 +51,12 @@ class TimerStore {
 
 	start() {
 		this.isRunning = true;
-		youtubePlayer.play();
-		youtubePlayer.unmute();
+		if (this.mode === 'work') {
+			youtubePlayer.play();
+			youtubePlayer.unmute();
+		} else {
+			youtubePlayer.pause();
+		}
 
 		this.interval = setInterval(() => {
 			if (this.secondsLeft > 0) {
