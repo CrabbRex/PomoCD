@@ -5,6 +5,8 @@
 	import TimerDisplay from '$lib/components/timer/TimerDisplay.svelte';
 	import { youtubePlayer } from '$lib/services/youtubePlayer.svelte';
 	import { albumArtStore } from '$lib/stores/albumArt.svelte';
+	import { timer } from '$lib/stores/timer.svelte';
+	import { formatTime } from '$lib/utils/time';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
@@ -13,8 +15,15 @@
 		albumArtStore.hydrate(data.albumArt);
 	});
 
+	$effect(() => {
+		document.title = `${formatTime(timer.secondsLeft)} — ${timer.phaseLabel} | PomoCD`;
+	});
+
 	onMount(() => {
 		youtubePlayer.init();
+		return () => {
+			document.title = 'PomoCD';
+		};
 	});
 </script>
 
