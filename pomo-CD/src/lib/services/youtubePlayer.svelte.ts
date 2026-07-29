@@ -31,7 +31,7 @@ class YouTubePlayerStore {
 				height: '100%',
 				width: '100%',
 				playerVars: {
-					autoplay: 1,
+					autoplay: 0,
 					mute: 1,
 					playsinline: 1,
 					controls: 0,
@@ -157,14 +157,26 @@ class YouTubePlayerStore {
 		this.player.pauseVideo();
 	}
 
+	// nextVideo()/previousVideo() always resume playback on the underlying
+	// player, even if it was paused — re-pause immediately if it wasn't
+	// already playing, so skipping tracks while paused doesn't start audio
+	// behind the timer/CD's back.
 	next() {
 		if (!this.isReady || !this.player) return;
+		const wasPlaying = this.player.getPlayerState() === window.YT.PlayerState.PLAYING;
 		this.player.nextVideo();
+		if (!wasPlaying) {
+			this.player.pauseVideo();
+		}
 	}
 
 	previous() {
 		if (!this.isReady || !this.player) return;
+		const wasPlaying = this.player.getPlayerState() === window.YT.PlayerState.PLAYING;
 		this.player.previousVideo();
+		if (!wasPlaying) {
+			this.player.pauseVideo();
+		}
 	}
 
 	unmute() {

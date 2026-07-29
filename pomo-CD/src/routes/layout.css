@@ -168,46 +168,76 @@
 		);
 }
 
-/* Physical button pattern — raised chrome/plastic bezel with an inset
-   press state. Defined outside any @layer so it wins over daisyUI's
-   layered .btn background regardless of source order. */
-.btn-physical {
-	background: radial-gradient(
-		120% 120% at 30% 20%,
-		#ffffff 0%,
-		#fafaf8 35%,
-		#e3e1da 75%,
-		#c7c5be 100%
-	);
-	border: 1px solid #b7b4ac;
-	color: #3a3835;
-	box-shadow:
-		0 1px 1px rgba(255, 255, 255, 0.9) inset,
-		0 -3px 4px rgba(138, 141, 145, 0.35) inset,
-		0 3px 6px rgba(43, 42, 40, 0.18),
-		0 1px 2px rgba(43, 42, 40, 0.12);
-	transition:
-		box-shadow 0.12s ease,
-		transform 0.12s ease,
-		background 0.12s ease;
+/* Physical button pattern — soft-touch moulded cap: housing well, switch
+   travel, extruded wall, printed icon, status LED (play/pause only).
+   Defined outside any @layer so it wins over daisyUI's layered .btn
+   background regardless of source order. Colours are custom properties so
+   the dark theme can override just the tokens (see [data-theme='dark']
+   below) without restyling the rules. */
+:root {
+	--cap-from: #fafaf8;
+	--cap-mid: #e3e1da;
+	--cap-to: #c7c5be;
+	--cap-edge: #c7c5be;
+	--cap-ink: #3a3835;
+	--cap-wall-1: #cbc8c0;
+	--cap-wall-2: #c2bfb7;
+	--cap-wall-3: #b8b5ad;
+	--cap-wall-4: #adaaa2;
+	--cap-drop: rgb(43 42 40 / 0.22);
+	--cap-spec: rgb(255 255 255 / 0.85);
+	--well-from: #c2bfb7;
+	--well-to: #ece9e3;
+	--led-off: #b8b5ad;
+	--led-on: #6f9a72;
 }
 
-.btn-physical:hover {
-	background: radial-gradient(
-		120% 120% at 30% 20%,
-		#ffffff 0%,
-		#fdfdfb 35%,
-		#e8e6e0 75%,
-		#cfccc4 100%
-	);
+/* Housing well — wraps each cap. Padding must stay >= the press travel, or
+   the cap clips through the rim on :active. */
+.btn-well {
+	display: inline-flex;
+	padding: 4px;
+	border-radius: 999px;
+	background: linear-gradient(180deg, var(--well-from), var(--well-to));
+	box-shadow:
+		0 2px 3px rgb(0 0 0 / 0.34) inset,
+		0 1px 0 var(--cap-spec);
+}
+
+/* Rectangular variant for non-circle caps (e.g. the modal Close button). */
+.btn-well-rect {
+	border-radius: var(--radius-field);
+}
+
+/* Cap: soft-touch surface + extruded wall + switch travel, merged. */
+.btn-physical {
+	position: relative; /* required — the LED is absolutely positioned */
+	background: linear-gradient(178deg, var(--cap-from), var(--cap-mid) 55%, var(--cap-to));
+	border: 1px solid var(--cap-edge);
+	color: var(--cap-ink);
+	filter: saturate(0.9);
+	box-shadow:
+		0 1px 0 rgb(255 255 255 / 0.35) inset,
+		0 -4px 6px rgb(0 0 0 / 0.16) inset,
+		0 1px 0 var(--cap-wall-1),
+		0 2px 0 var(--cap-wall-2),
+		0 3px 0 var(--cap-wall-3),
+		0 4px 0 var(--cap-wall-4),
+		0 7px 9px var(--cap-drop);
+	transition:
+		transform 0.24s cubic-bezier(0.18, 0.9, 0.28, 1.4),
+		box-shadow 0.24s ease,
+		background 0.2s ease;
 }
 
 .btn-physical:active {
-	background: radial-gradient(120% 120% at 30% 20%, #e3e1da 0%, #eceae4 60%, #f3f1ec 100%);
+	transform: translateY(3px) scale(0.985);
 	box-shadow:
-		0 2px 4px rgba(43, 42, 40, 0.28) inset,
-		0 -1px 1px rgba(255, 255, 255, 0.6) inset;
-	transform: translateY(1px);
+		0 2px 3px rgb(0 0 0 / 0.28) inset,
+		0 1px 0 var(--cap-wall-2),
+		0 2px 4px var(--cap-drop);
+	transition-duration: 0.04s;
+	transition-timing-function: linear;
 }
 
 .btn-physical:focus-visible {
@@ -215,45 +245,75 @@
 	outline-offset: 2px;
 }
 
-/* Dark theme's smoky-acrylic take on the same bezel — gunmetal glass instead
-   of white plastic, translucent so the page glow behind it still shows. */
-[data-theme='dark'] .btn-physical {
-	background: radial-gradient(
-		120% 120% at 30% 20%,
-		rgb(120 122 128 / 0.6) 0%,
-		rgb(70 71 76 / 0.55) 35%,
-		rgb(30 31 34 / 0.55) 75%,
-		rgb(15 16 18 / 0.6) 100%
-	);
-	border: 1px solid rgb(150 152 158 / 0.4);
-	color: #e8e6e0;
-	box-shadow:
-		0 1px 1px rgba(255, 255, 255, 0.15) inset,
-		0 -3px 4px rgba(0, 0, 0, 0.35) inset,
-		0 3px 6px rgba(0, 0, 0, 0.4),
-		0 1px 2px rgba(0, 0, 0, 0.3);
+/* Printed icon — glyph reads as pad-printed into the plastic. */
+.btn-physical svg {
+	opacity: 0.72;
+	filter: drop-shadow(0 1px 0 var(--cap-spec));
 }
 
-[data-theme='dark'] .btn-physical:hover {
-	background: radial-gradient(
-		120% 120% at 30% 20%,
-		rgb(140 142 148 / 0.65) 0%,
-		rgb(85 87 92 / 0.6) 35%,
-		rgb(38 39 42 / 0.6) 75%,
-		rgb(20 21 23 / 0.65) 100%
-	);
+/* Smaller caps (btn-xs/btn-sm) get a proportionally thinner wall so it
+   doesn't read as chunkier than the lg caps. */
+.btn-physical.btn-xs,
+.btn-physical.btn-sm {
+	box-shadow:
+		0 1px 0 rgb(255 255 255 / 0.35) inset,
+		0 -2px 3px rgb(0 0 0 / 0.16) inset,
+		0 1px 0 var(--cap-wall-1),
+		0 2px 0 var(--cap-wall-2),
+		0 4px 5px var(--cap-drop);
 }
 
-[data-theme='dark'] .btn-physical:active {
-	background: radial-gradient(
-		120% 120% at 30% 20%,
-		rgb(20 21 23 / 0.6) 0%,
-		rgb(45 46 50 / 0.55) 60%,
-		rgb(70 71 76 / 0.5) 100%
-	);
+.btn-physical.btn-xs:active,
+.btn-physical.btn-sm:active {
+	transform: translateY(2px) scale(0.985);
 	box-shadow:
-		0 2px 4px rgba(0, 0, 0, 0.5) inset,
-		0 -1px 1px rgba(255, 255, 255, 0.1) inset;
+		0 1px 2px rgb(0 0 0 / 0.28) inset,
+		0 1px 0 var(--cap-wall-2),
+		0 1px 3px var(--cap-drop);
+}
+
+/* Status LED — play/pause cap only. */
+.led {
+	position: absolute;
+	bottom: 7px;
+	left: 50%;
+	translate: -50% 0;
+	width: 5px;
+	height: 5px;
+	border-radius: 999px;
+	background: var(--led-off);
+	box-shadow:
+		0 1px 1px var(--cap-spec),
+		0 0 0 1px rgb(0 0 0 / 0.18) inset;
+	transition:
+		background 0.18s ease,
+		box-shadow 0.18s ease;
+}
+
+.btn-physical.is-on .led {
+	background: var(--led-on);
+	box-shadow:
+		0 0 5px 1px var(--led-on),
+		0 0 1px 0 var(--led-on) inset;
+}
+
+/* Dark theme's smoky-acrylic take on the same cap — override tokens only. */
+[data-theme='dark'] {
+	--cap-from: rgb(110 112 118 / 0.6);
+	--cap-mid: rgb(52 53 58 / 0.62);
+	--cap-to: rgb(24 25 28 / 0.66);
+	--cap-edge: rgb(150 152 158 / 0.4);
+	--cap-ink: #e8e6e0;
+	--cap-wall-1: #2c2d31;
+	--cap-wall-2: #26272b;
+	--cap-wall-3: #1f2023;
+	--cap-wall-4: #17181a;
+	--cap-drop: rgb(0 0 0 / 0.55);
+	--cap-spec: rgb(255 255 255 / 0.28);
+	--well-from: #08090a;
+	--well-to: #26272b;
+	--led-off: #1f2023;
+	--led-on: #7fae83;
 }
 
 @theme {
@@ -290,5 +350,13 @@
 
 	.animate-marquee {
 		animation: none;
+	}
+
+	.btn-physical {
+		transition: none;
+	}
+
+	.btn-physical:active {
+		transition: none;
 	}
 }
