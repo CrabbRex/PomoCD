@@ -91,6 +91,7 @@ class TimerStore {
 	}
 
 	private completePhase() {
+		const wasRunning = this.isRunning;
 		this.pause();
 
 		if (this.mode === 'work') {
@@ -102,7 +103,10 @@ class TimerStore {
 		}
 
 		this.secondsLeft = this.totalSeconds;
-		this.start(); // auto-advance into the next phase
+
+		if (wasRunning) {
+			this.start(); // auto-advance into the next phase
+		}
 	}
 }
 
